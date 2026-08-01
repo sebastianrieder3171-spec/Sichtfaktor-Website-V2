@@ -1,0 +1,1567 @@
+/* =============================================================
+   SICHTFAKTOR – styles.css
+   Minimalistisch · überwiegend Weiß · modern/hochwertig
+   -------------------------------------------------------------
+   Aufbau:
+   1.  Design-Tokens (Farben, Typo, Abstände)  <- hier Farben ändern
+   2.  Reset & Basis
+   3.  Layout-Helfer (container, section, grid)
+   4.  Typografie
+   5.  Buttons
+   6.  Header / Navigation
+   7.  Hero
+   8.  Sektionen (Angebot, Ablauf, Produkte, Vorteile, Referenzen, CTA)
+   9.  Produktkarten & Shop
+   10. Formulare
+   11. Footer
+   12. Utilities & Animationen
+   13. Responsive (Media Queries)
+   ============================================================= */
+
+/* 1. ============ DESIGN-TOKENS ============
+   Zum Umfärben der ganzen Seite genügt es, diese Werte zu ändern. */
+:root {
+  /* --- FARBEN (hier zentral anpassen) – minimalistisch, überwiegend Weiß --- */
+  --color-bg:          #ffffff;  /* Seitenhintergrund (Weiß)          */
+  --color-surface:     #ffffff;  /* Karten / Flächen (ebenfalls Weiß) */
+  --color-surface-2:   #f7f7f7;  /* sehr dezentes Hellgrau            */
+  --color-ink:         #111111;  /* Haupttext (fast Schwarz)          */
+  --color-muted:       #6b6b6b;  /* Sekundärtext (Grau)               */
+  --color-accent:      #111111;  /* Akzent = Schwarz (minimalistisch) */
+  --color-accent-dark: #000000;  /* Akzent dunkel (Hover)             */
+  --color-line:        #e7e7e7;  /* dezente hellgraue Linien / Rahmen */
+  --color-dark:        #ffffff;  /* KEINE dunklen Sektionen -> Weiß   */
+  --color-dark-soft:   #f0f0f0;
+
+  /* --- TYPOGRAFIE (Schriftfamilien hier anpassen) ---
+     Moderne, reduzierte Sans-Serif für Überschriften UND Fließtext. */
+  --font-head: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+               Helvetica, Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+               Helvetica, Arial, sans-serif;
+  --header-h: 66px;                     /* Höhe der Navigationsleiste */
+
+  /* --- BRILLEN-PRODUKTBILDER (gilt für ALLE Produktkarten der Website) ---
+     Hier zentral das Seitenverhältnis der Bildfläche ändern. */
+  --produktbild-ratio: 1 / 1;
+
+  /* --- MASSE / ABSTÄNDE (Layout hier anpassen) --- */
+  --maxw: 1200px;
+  --radius: 4px;
+  --radius-lg: 10px;
+  --gap: clamp(1rem, 3vw, 2rem);
+
+  /* --- HERO (Bild-Transparenz & Logogröße hier anpassen) --- */
+  --hero-bg-opacity: 1;                 /* 0 = unsichtbar, 1 = voll  */
+  --hero-logo-width: min(640px, 82vw);  /* Größe des Logos im Hero   */
+
+  /* --- EFFEKTE --- */
+  --shadow: 0 10px 40px rgba(0, 0, 0, .06);
+  --shadow-hover: 0 18px 60px rgba(0, 0, 0, .12);
+  --transition: .35s cubic-bezier(.2, .7, .3, 1);
+}
+
+/* 2. ============ RESET & BASIS ============ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-bg);
+  line-height: 1.65;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; height: auto; }
+
+a { color: inherit; text-decoration: none; }
+
+ul { list-style: none; margin: 0; padding: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* 3. ============ LAYOUT-HELFER ============ */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(1.15rem, 4vw, 2.5rem);
+}
+
+.section {
+  padding-block: clamp(3.5rem, 8vw, 7rem);
+}
+
+.section--tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
+
+/* Dezent abgesetzte Sektion – sehr helles Neutralgrau statt Farbe */
+.section--surface {
+  background: var(--color-surface-2);
+  border-block: 1px solid var(--color-line);
+}
+/* Ehemals dunkle Sektion -> jetzt ebenfalls hell/weiß (keine dunklen Bereiche) */
+.section--dark {
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+.section--dark .section-eyebrow { color: var(--color-muted); }
+.section--dark .lead { color: var(--color-muted); }
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: clamp(2rem, 5vw, 3.25rem);
+}
+.section-head.center { margin-inline: auto; text-align: center; }
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: .78rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  font-weight: 600;
+  margin-bottom: .9rem;
+}
+
+.grid { display: grid; gap: var(--gap); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* 4. ============ TYPOGRAFIE ============ */
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  line-height: 1.12;
+  margin: 0 0 .5em;
+  letter-spacing: -.01em;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.4rem); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.5rem); }
+h3 { font-size: clamp(1.2rem, 2.2vw, 1.5rem); }
+
+/* Große Fashion-Überschriften in Großbuchstaben (per Klasse einsetzbar) */
+.u-upper { text-transform: uppercase; letter-spacing: .02em; }
+
+p { margin: 0 0 1rem; }
+
+.lead {
+  font-size: clamp(1.05rem, 2vw, 1.28rem);
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.muted { color: var(--color-muted); }
+
+/* 5. ============ BUTTONS ============ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  font-family: var(--font-body);
+  font-size: .98rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: .95em 1.7em;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btn-accent {
+  background: var(--color-accent);
+  color: #fff;
+}
+.btn-accent:hover { background: var(--color-accent-dark); transform: translateY(-2px); }
+
+.btn-dark { background: var(--color-ink); color: #fff; }
+.btn-dark:hover { background: #000; transform: translateY(-2px); }
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+.btn-outline:hover { background: var(--color-ink); color: #fff; }
+
+.section--dark .btn-outline { border-color: #f3ece1; color: #f3ece1; }
+.section--dark .btn-outline:hover { background: #f3ece1; color: var(--color-dark); }
+
+.btn-ghost { padding-inline: 0; color: var(--color-accent-dark); }
+.btn-ghost::after { content: "→"; transition: transform var(--transition); }
+.btn-ghost:hover::after { transform: translateX(5px); }
+
+.btn-block { width: 100%; }
+
+/* 6. ============ HEADER / NAVIGATION ============ */
+/* Standard (Unterseiten): schlichte weiße Leiste oben. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-line);
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+.site-header.scrolled {
+  border-bottom-color: var(--color-line);
+  background: rgba(255, 255, 255, .96);
+}
+
+/* --- Startseite: Navigation liegt transparent ÜBER dem Hero-Bild --- */
+body.home .site-header {
+  position: fixed;
+  left: 0; right: 0;
+  background: transparent;
+  border-bottom-color: transparent;
+  color: #fff;                 /* helle Schrift über dem Bild */
+}
+/* Über dem Hero wirklich transparent (kein Weichzeichner) */
+body.home .site-header:not(.scrolled) {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+/* Nach Verlassen des Hero: weißer Hintergrund, dunkle Schrift */
+body.home .site-header.scrolled {
+  background: rgba(255, 255, 255, .96);
+  border-bottom-color: var(--color-line);
+  color: var(--color-ink);
+}
+
+/* --- Dreiteilige Startseiten-Navigation: links | Logo | rechts --- */
+.nav-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: var(--header-h);
+  gap: 1rem;
+}
+.nav-side { display: flex; align-items: center; gap: 1.4rem; }
+.nav-side--left  { justify-self: start; }
+.nav-side--right { justify-self: end; }
+.nav-links { display: flex; align-items: center; gap: 1.6rem; }
+.nav-bar a,
+.nav-bar .nav-icon {
+  color: inherit;              /* erbt weiß (Hero) bzw. schwarz (scrolled) */
+  font-size: .9rem;
+  font-weight: 500;
+  letter-spacing: .01em;
+  transition: opacity var(--transition);
+}
+.nav-bar a:hover { opacity: .65; }
+
+/* Zentrales Logo als Wortmarke – passt Farbe automatisch an (gut lesbar) */
+.nav-logo {
+  justify-self: center;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+/* Icon-Buttons (Suche, Warenkorb) */
+.nav-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 40px; height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+.nav-icon svg { width: 20px; height: 20px; display: block; }
+.nav-icon:hover { opacity: .65; }
+
+/* Mobiles Overlay-Menü (schlicht weiß) – Standard versteckt.
+   top:100% -> öffnet direkt unter dem gesamten Header (Band + Nav). */
+.nav-menu {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  background: #fff;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-line);
+  padding: .5rem clamp(1.15rem, 4vw, 2.5rem) 1.5rem;
+  box-shadow: var(--shadow);
+}
+.nav-menu a {
+  display: block;
+  color: var(--color-ink);
+  padding: 1rem 0;
+  font-size: 1.05rem;
+  border-bottom: 1px solid var(--color-line);
+}
+.nav-menu.open { display: block; }
+
+/* Hamburger über dem Hero weiß, beim Scrollen wieder dunkel */
+body.home .site-header:not(.scrolled) .nav-toggle span { background: #fff; }
+
+/* Mobil: nur Hamburger (links), Logo (mittig), Warenkorb (rechts) */
+@media (max-width: 860px) {
+  .nav-links,
+  .nav-hide-mobile { display: none; }
+  .nav-bar { gap: .5rem; }
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 74px;
+}
+
+.brand {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--color-ink);
+}
+.brand span { color: var(--color-muted); }
+
+.main-nav { display: flex; align-items: center; gap: 2.2rem; }
+.main-nav ul { display: flex; align-items: center; gap: 1.7rem; }
+.main-nav a {
+  font-size: .96rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  position: relative;
+  padding-block: .35rem;
+  transition: color var(--transition);
+}
+.main-nav a:hover { color: var(--color-accent-dark); }
+.main-nav a[aria-current="page"] { color: var(--color-accent-dark); }
+.main-nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 2px;
+  background: var(--color-accent);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px; height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--color-ink);
+  margin-inline: auto;
+  transition: var(--transition);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* 7. ============ HERO ============
+   Vollbild-Hero: Hintergrundbild (cover, mittig) + zentriertes Logo.
+   - Bild austauschen:  Slot "home.hero"  in assets/js/images-config.js
+   - Logo austauschen:  Slot "brand.logo" in assets/js/images-config.js
+   - Bild-Transparenz:  Variable --hero-bg-opacity (oben in :root)
+   - Logogröße:         Variable --hero-logo-width (oben in :root) */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;      /* korrekte Höhe auf Mobilgeräten */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--color-bg);
+  /* Header ist sticky/überlagernd -> Logo bleibt trotzdem mittig */
+}
+
+/* Hintergrundbild als eigene Ebene, damit die Transparenz nur das Bild betrifft */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  /* background-image kommt aus der zentralen Bildverwaltung (Slot "home.hero") */
+  background-size: cover;      /* füllt den gesamten Bereich */
+  background-position: center; /* mittig */
+  background-repeat: no-repeat;
+  opacity: var(--hero-bg-opacity);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  /* Sehr dezente weiße Fläche, damit das Logo auf dem Foto lesbar bleibt.
+     Für ein Logo direkt auf dem Bild: background/backdrop-filter entfernen. */
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(2.25rem, 5vw, 4rem);
+  background: rgba(255, 255, 255, .82);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: var(--radius);   /* nur leicht gerundet */
+}
+
+/* Logo mittig im Vordergrund */
+.hero-logo {
+  width: var(--hero-logo-width);
+  height: auto;
+  max-width: 100%;
+}
+
+/* Dezenter Scroll-Hinweis (passt zum minimalistischen Design) */
+.hero-scroll {
+  position: absolute;
+  bottom: clamp(1.25rem, 4vh, 2.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .6rem;
+  color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .35);
+  font-size: .68rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+}
+.hero-scroll-arrow {
+  width: 14px; height: 14px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  animation: heroBounce 1.9s ease-in-out infinite;
+}
+@keyframes heroBounce {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: .55; }
+  50%      { transform: rotate(45deg) translate(3px, 3px); opacity: 1; }
+}
+
+/* 8. ============ SEKTIONEN ============ */
+
+/* --- Angebots-/Zielgruppen-Karten --- */
+.offer-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+.offer-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+.offer-card .icon {
+  width: 52px; height: 52px;
+  display: grid; place-items: center;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.offer-card h3 { margin-bottom: .4rem; }
+.offer-card p { color: var(--color-muted); flex-grow: 1; }
+.offer-card .btn-ghost { margin-top: 1rem; }
+
+/* --- So funktioniert es (Steps) --- */
+.steps { counter-reset: step; }
+.step {
+  position: relative;
+  padding: 2rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+}
+.step .step-num {
+  counter-increment: step;
+  font-family: var(--font-head);
+  font-size: 2.6rem;
+  color: var(--color-accent);
+  line-height: 1;
+  display: block;
+  margin-bottom: .75rem;
+}
+.step .step-num::before { content: "0" counter(step); }
+.step h3 { margin-bottom: .4rem; }
+.step p { color: var(--color-muted); margin: 0; }
+
+/* --- Vorteile / Qualität --- */
+.feature {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.feature .feature-icon {
+  flex: 0 0 auto;
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  color: var(--color-ink);
+  font-size: 1.15rem;
+}
+.feature h3 { font-size: 1.2rem; margin-bottom: .25rem; }
+.feature p { color: var(--color-muted); margin: 0; font-size: .97rem; }
+
+/* --- Split (Bild + Text) für Unterseiten --- */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.split--reverse .split-media { order: 2; }
+.split-media .placeholder { aspect-ratio: 5 / 4; border-radius: var(--radius-lg); }
+
+/* --- Referenzen / Logos --- */
+.logo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  justify-content: center;
+  opacity: .8;
+}
+.logo-chip {
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+.reference-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+}
+.reference-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+.reference-card .placeholder { aspect-ratio: 4 / 3; border-radius: 0; }
+.reference-card .reference-body { padding: 1.5rem; }
+.reference-card .tag {
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+  font-weight: 600;
+}
+.reference-card h3 { font-size: 1.25rem; margin: .35rem 0 .35rem; }
+.reference-card p { color: var(--color-muted); margin: 0; font-size: .95rem; }
+
+/* --- Testimonial / Zitat --- */
+.quote {
+  max-width: 760px;
+  margin-inline: auto;
+  text-align: center;
+}
+.quote blockquote {
+  font-family: var(--font-head);
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  line-height: 1.3;
+  margin: 0 0 1.25rem;
+}
+.quote cite { font-style: normal; color: var(--color-muted); font-size: .95rem; }
+
+/* --- Final CTA --- */
+.cta-band { text-align: center; }
+.cta-band h2 { margin-bottom: .5rem; }
+.cta-band .lead { max-width: 52ch; margin-inline: auto; margin-bottom: 2rem; }
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* --- Page hero (Unterseiten) --- */
+.page-hero {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+.page-hero .lead { max-width: 60ch; }
+.breadcrumb { font-size: .85rem; color: var(--color-muted); margin-bottom: 1rem; }
+.breadcrumb a:hover { color: var(--color-accent-dark); }
+
+/* 9. ============ PRODUKTKARTEN & SHOP ============ */
+.shop-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+.filter-group { display: flex; flex-wrap: wrap; gap: .5rem; }
+.filter-btn {
+  font-family: var(--font-body);
+  font-size: .9rem;
+  font-weight: 500;
+  padding: .55em 1.1em;
+  border: 1px solid var(--color-line);
+  background: transparent;
+  color: var(--color-ink);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.filter-btn:hover { border-color: var(--color-accent); }
+.filter-btn.active { background: var(--color-ink); color: #fff; border-color: var(--color-ink); }
+
+.product-count { font-size: .9rem; color: var(--color-muted); }
+
+/* Produktraster – Fashion-Shop-Look mit viel Weißraum.
+   Desktop: 4 Spalten · Tablet: 2–3 · Mobil: 1–2 (siehe Media Queries) */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3.5vw, 3rem) clamp(1.25rem, 2.5vw, 2rem);
+}
+
+/* Karte auf Weiß, ohne Rahmen – reduziert & hochwertig */
+.product-card {
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.product-media {
+  position: relative;
+  aspect-ratio: 4 / 5;          /* großes, gleichmäßiges Produktbild */
+  overflow: hidden;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+}
+.product-media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+.product-card:hover .product-media img { transform: scale(1.04); }
+.product-media .placeholder { height: 100%; border-radius: 0; }
+.product-badge {
+  position: absolute;
+  top: .85rem; left: .85rem;
+  background: rgba(255, 255, 255, .92);
+  padding: .3rem .75rem;
+  border-radius: 100px;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--color-ink);
+}
+
+.product-body {
+  padding: 1rem .1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  flex-grow: 1;
+}
+.product-body .product-cat {
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  font-weight: 600;
+}
+.product-body h3 { font-size: 1.2rem; margin: 0; }
+.product-color {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .86rem;
+  color: var(--color-muted);
+}
+.color-dot {
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.15);
+  display: inline-block;
+}
+.product-desc { font-size: .9rem; color: var(--color-muted); margin: .2rem 0 0; }
+.product-price {
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-top: .25rem;
+}
+.product-actions { margin-top: auto; padding-top: 1rem; display: flex; gap: .6rem; }
+.product-actions .btn { flex: 1; padding-inline: 1rem; font-size: .88rem; }
+
+.shop-note {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  font-size: .92rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+/* 10. ============ FORMULARE ============ */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+.form { display: grid; gap: 1.15rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.15rem; }
+.field { display: flex; flex-direction: column; gap: .4rem; }
+.field label { font-size: .9rem; font-weight: 600; }
+.field .req { color: var(--color-accent-dark); }
+.field input,
+.field select,
+.field textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-ink);
+  padding: .8em 1em;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  width: 100%;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(176, 122, 75, .15);
+}
+.field textarea { resize: vertical; min-height: 140px; }
+.form-hint { font-size: .82rem; color: var(--color-muted); }
+.form-status {
+  font-size: .92rem;
+  padding: .85rem 1rem;
+  border-radius: var(--radius);
+  display: none;
+}
+.form-status.show { display: block; }
+.form-status.ok { background: #e9f2e5; color: #3c6b2f; }
+.form-status.err { background: #f6e6df; color: #9a4a2c; }
+
+.contact-aside {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+.contact-aside h3 { margin-top: 0; }
+.contact-item { display: flex; gap: .8rem; margin-bottom: 1.25rem; }
+.contact-item .ci-icon { font-size: 1.25rem; }
+.contact-item strong { display: block; font-size: .95rem; }
+.contact-item span { color: var(--color-muted); font-size: .92rem; }
+
+/* 10b. ============ DURCHLAUFENDES TEXTBAND (MARQUEE) ============
+   Endlos laufendes Band. Der Inhalt wird im HTML zweimal ausgegeben,
+   damit die Wiederholung ohne sichtbaren Sprung nahtlos ist. */
+.marquee {
+  background: var(--color-bg);
+  border-block: 1px solid var(--color-line);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee--top { border-top: none; }         /* sitzt ganz oben im Header */
+.marquee__track {
+  display: inline-flex;
+  align-items: center;
+  will-change: transform;
+  animation: marquee 38s linear infinite;   /* langsam & ruhig */
+}
+.marquee--slow .marquee__track { animation-duration: 55s; }  /* 2. Band langsamer */
+.marquee__group {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.marquee__item {
+  padding: .7rem clamp(1rem, 3vw, 2.2rem);
+  font-size: clamp(.72rem, 1.4vw, .85rem);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  font-weight: 600;
+}
+.marquee__item::after {           /* dezenter Trenner zwischen den Wiederholungen */
+  content: "—";
+  margin-left: clamp(1rem, 3vw, 2.2rem);
+  color: var(--color-line);
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }   /* genau eine Gruppe -> nahtlos */
+}
+
+/* 10c. ============ FIRMEN-/VEREINS-BLÖCKE (2 Spalten, gespiegelt) ============ */
+.feature-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.feature-block + .feature-block { margin-top: clamp(3rem, 7vw, 6rem); }
+.feature-block--reverse .fb-media { order: 2; }
+.fb-media {
+  aspect-ratio: 4 / 3;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  overflow: hidden;
+}
+.fb-media img { width: 100%; height: 100%; object-fit: cover; }
+.fb-body h2 { margin-bottom: .5rem; }
+.fb-body .lead { margin-bottom: 1.75rem; }
+.fb-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+/* 10d. ============ HORIZONTALE PRODUKTREIHE (SLIDER) ============ */
+.product-row { position: relative; }
+.product-row__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+.product-row__head h2 { margin: 0; }
+
+/* Dezente Pfeilbuttons neben der Überschrift */
+.slider-arrows { display: flex; gap: .5rem; }
+.slider-arrow {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--color-ink);
+  transition: border-color var(--transition), opacity var(--transition);
+}
+.slider-arrow:hover { border-color: var(--color-ink); }
+.slider-arrow svg { width: 18px; height: 18px; }
+.slider-arrow:disabled { opacity: .3; cursor: default; }
+
+/* Scrollbare Spur: Flexbox + Scroll-Snap, Scrollbar optisch ausgeblendet */
+.slider-track {
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;      /* weiches Wischen auf iOS */
+  scrollbar-width: none;                   /* Firefox */
+  padding-bottom: .5rem;
+  /* Randabschluss, damit die erste/letzte Karte nicht klebt */
+  scroll-padding-inline: 2px;
+}
+.slider-track::-webkit-scrollbar { display: none; }  /* Chrome/Safari */
+
+/* Produktkarte im Slider – große Karte, Bild dominiert.
+   Desktop: ~3 Karten + Anschnitt der nächsten (Breite ~28%). */
+.pcard {
+  scroll-snap-align: start;
+  flex: 0 0 28%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* ===== EINHEITLICHE BILDFLÄCHE ALLER BRILLEN-PRODUKTKARTEN =====
+   Gilt für Slider-Karten (.pcard) und Raster-Karten (.gcard) – also für
+   Startseite, Sonnenbrillen-Übersicht sowie empfohlene und ähnliche Produkte.
+   Das Bild füllt die Fläche randlos aus: kein Innenabstand, keine Linie.
+   Seitenverhältnis zentral über --produktbild-ratio ganz oben in :root.
+   Ausgenommen: Produktgalerie und Lifestylebilder auf der Produktdetailseite
+   sowie die Kollektionskacheln. */
+.pcard-media,
+.gcard-media {
+  position: relative;
+  aspect-ratio: var(--produktbild-ratio);
+  background: var(--color-surface-2); /* nur sichtbar, solange kein Bild da ist */
+  overflow: hidden;
+}
+.pcard-img,
+.gcard-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                  /* füllt den Container vollständig */
+  object-position: center center;     /* mittiger Ausschnitt, keine Verzerrung */
+  padding: 0;
+}
+
+.pcard-media { display: block; }
+/* neutraler Platzhalter, falls Produktbild fehlt */
+.pcard-ph {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-size: .72rem; letter-spacing: .18em;
+  color: #b8b8b8;
+}
+.pcard-img { transition: opacity var(--transition); }
+.pcard-img--hover { opacity: 0; }
+.pcard:hover .pcard-img--hover { opacity: 1; }
+.pcard-badge {
+  position: absolute; top: .8rem; left: .8rem; z-index: 2;
+  background: #fff;
+  color: var(--color-ink);
+  padding: .3rem .7rem;
+  font-size: .66rem;
+  letter-spacing: .12em;
+  font-weight: 700;
+}
+/* Viel Abstand zwischen Bild und Text, Texte linksbündig */
+.pcard-body {
+  padding-top: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  text-align: left;
+}
+.pcard-name { font-size: 1.05rem; letter-spacing: .04em; margin: 0; }
+.pcard-color { color: var(--color-muted); font-size: .9rem; margin: 0; }
+.pcard-dots { display: flex; gap: .4rem; margin: .2rem 0; }
+.pcard-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.15);
+}
+.pcard-price { font-size: .95rem; font-weight: 600; margin: .1rem 0 .6rem; }
+.pcard-cta {
+  align-self: flex-start;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-ink);
+  padding-bottom: 2px;
+}
+.pcard-cta:hover { opacity: .6; }
+
+/* 10e. ============ LIFESTYLE-/FIRMENBILD-BEREICH ============ */
+.media-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+.media-grid__stack {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+.media-item {
+  position: relative;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  overflow: hidden;
+}
+.media-item--tall { aspect-ratio: 3 / 4; }
+.media-item--wide { aspect-ratio: 3 / 2; }
+.media-item img { width: 100%; height: 100%; object-fit: cover; }
+.media-item figcaption {
+  position: absolute; left: 0; bottom: 0;
+  background: rgba(255,255,255,.9);
+  padding: .4rem .8rem;
+  font-size: .78rem;
+  color: var(--color-ink);
+}
+
+/* 10f. ============ INDIVIDUALISIERUNG IN 3 SCHRITTEN ============ */
+.process {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+.process__step { border-top: 1px solid var(--color-line); padding-top: 1.25rem; }
+.process__num {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: .75rem;
+}
+.process__step h3 { margin-bottom: .35rem; }
+.process__step p { color: var(--color-muted); margin: 0; }
+
+/* 10g. ============ SERVICELEISTE (VORTEILE) ============ */
+.service-bar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  text-align: center;
+}
+.service-item .service-icon {
+  font-size: 1.4rem;
+  display: block;
+  margin-bottom: .5rem;
+}
+.service-item strong { display: block; font-size: .95rem; }
+.service-item span { color: var(--color-muted); font-size: .85rem; }
+
+/* 10h. ============ KOLLEKTIONSSEITE (SONNENBRILLEN) ============ */
+
+/* Aktiver Navigationspunkt: dezente dünne Unterstreichung */
+.nav-links a[aria-current="page"] {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+/* Dünne obere/untere Linie um eine ansonsten weiße Sektion */
+.section--lined { border-block: 1px solid var(--color-line); }
+
+/* --- Flacher, breiter Kampagnen-Banner direkt unter dem Header --- */
+.category-banner {
+  position: relative;
+  width: 100%;
+  height: 360px;                          /* Desktop ~300–400 px */
+  background: var(--color-surface-2);     /* neutraler Platzhalter, falls Bild fehlt */
+  overflow: hidden;
+}
+.category-banner img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* Sparsamer Text links (kein starker Overlay) */
+.category-banner__text {
+  position: absolute;
+  left: clamp(1.15rem, 4vw, 3.5rem);
+  top: 50%; transform: translateY(-50%);
+  color: #fff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, .35);
+  max-width: 30ch;
+}
+.category-banner__text .cb-title {
+  display: block;
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+.category-banner__text .cb-sub {
+  display: block;
+  font-size: clamp(.8rem, 1.6vw, 1rem);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-top: .5rem;
+}
+.category-banner__text .cb-desc {
+  display: block;
+  font-size: clamp(.85rem, 1.6vw, 1rem);
+  margin-top: .5rem;
+}
+
+/* --- Festes 4-Spalten-Produktgrid (kein Slider) --- */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(.6rem, 1.4vw, 1.25rem);      /* kleine, gleichmäßige Abstände */
+  align-items: stretch;
+}
+/* zweites Raster (Signature) ohne großen Leerraum anschließen */
+.category-grid + .category-grid { margin-top: clamp(.6rem, 1.4vw, 1.25rem); }
+
+/* Produktkarte im Grid – weiß, flach, alle exakt gleich hoch */
+.gcard { display: flex; flex-direction: column; background: var(--color-bg); }
+/* Bildfläche und Bilddarstellung: siehe zentrale Regel bei .pcard-media */
+.gcard-link { position: absolute; inset: 0; display: block; }
+.gcard-img { transition: transform var(--transition); }
+.gcard:hover .gcard-img { transform: scale(1.04); }  /* ruhige, kurze Bewegung */
+.gcard-badge {
+  position: absolute; top: .6rem; left: .6rem; z-index: 2;
+  background: #fff; color: var(--color-ink);
+  padding: .25rem .55rem;
+  font-size: .62rem; letter-spacing: .1em; font-weight: 700;
+}
+.gcard-cart {
+  position: absolute; top: .6rem; right: .6rem; z-index: 2;
+  width: 34px; height: 34px;
+  display: grid; place-items: center;
+  background: #fff; color: var(--color-ink);
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+}
+.gcard-cart:hover { border-color: var(--color-ink); }
+.gcard-cart svg { width: 16px; height: 16px; }
+.gcard-body { padding: .7rem .1rem 0; }
+.gcard-row {
+  display: flex; align-items: baseline; justify-content: space-between; gap: .6rem;
+}
+.gcard-name {
+  margin: 0;
+  font-size: .92rem; font-weight: 600; letter-spacing: .02em;
+}
+.gcard-color {
+  display: block;
+  font-size: .78rem; font-weight: 400; letter-spacing: 0;
+  color: var(--color-muted);
+  margin-top: .1rem;
+}
+.gcard-price { font-size: .92rem; font-weight: 600; white-space: nowrap; }
+.gcard .pcard-dots { margin-bottom: .45rem; }
+
+/* --- Editorial-Kachel im Raster (2 Spalten breit) --- */
+.editorial-card {
+  position: relative;
+  grid-column: span 2;                    /* zwei Spalten breit */
+  min-height: clamp(220px, 26vw, 380px);  /* füllt die Reihenhöhe, kollabiert nie */
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-surface-2);
+}
+.editorial-card img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+}
+.editorial-text {
+  position: absolute;
+  left: clamp(1rem, 2.5vw, 1.75rem);
+  bottom: clamp(1rem, 2.5vw, 1.75rem);
+  color: #fff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, .35);
+  z-index: 1;
+}
+.editorial-title {
+  display: block;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+}
+.editorial-sub { display: block; font-size: .9rem; margin-top: .25rem; }
+.editorial-cta {
+  display: inline-block; margin-top: .6rem;
+  font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+  border-bottom: 1px solid #fff; padding-bottom: 2px;
+}
+
+/* 10i. ============ PRODUKTDETAILSEITE (produkt.html) ============ */
+
+/* Breadcrumb – klein, grau */
+.pd-breadcrumb {
+  padding-top: 1.25rem;
+  font-size: .82rem;
+  color: var(--color-muted);
+}
+.pd-breadcrumb a:hover { color: var(--color-ink); }
+.pd-breadcrumb [aria-current="page"] { color: var(--color-ink); }
+
+/* Zweispaltiges Layout: Bilder links (~62 %), Infos rechts (sticky) */
+.pd-layout {
+  display: grid;
+  grid-template-columns: 62% 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+.pd-info {
+  position: sticky;
+  top: 120px;                 /* unter dem sticky Header */
+  align-self: start;
+}
+
+/* Bildergalerie – 2-Spalten-Raster, gleiche Bildverhältnisse */
+.pd-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(.6rem, 1.4vw, 1rem);
+}
+.pd-shot {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  background: var(--color-surface-2);   /* sehr hellgraue Bildfläche */
+  border: 1px solid var(--color-line);
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.pd-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+}
+.pd-img--contain { object-fit: contain; padding: clamp(1rem, 3vw, 2.2rem); }
+.pd-img--cover   { object-fit: cover; }
+
+/* --- Produktinformationen (rechts) --- */
+.pd-eyebrow {
+  font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--color-muted); margin: 0 0 .6rem;
+}
+.pd-badge {
+  display: inline-block;
+  background: var(--color-ink); color: #fff;
+  font-size: .64rem; letter-spacing: .1em; font-weight: 700;
+  padding: .25rem .55rem; margin-bottom: .6rem;
+}
+.pd-name { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0 0 .25rem; }
+.pd-color { color: var(--color-muted); margin: 0 0 .75rem; }
+.pd-price { font-size: 1.25rem; font-weight: 600; margin: 0 0 1rem; }
+.pd-short { color: var(--color-muted); margin: 0 0 1.5rem; max-width: 42ch; }
+
+/* Farbauswahl */
+.pd-variants { margin-bottom: 1.5rem; }
+.pd-variants__label {
+  font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--color-muted); margin: 0 0 .6rem;
+}
+.pd-variants__label strong { color: var(--color-ink); }
+.pd-swatches { display: flex; flex-wrap: wrap; gap: .55rem; }
+.pd-swatch {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid var(--color-line);
+}
+.pd-swatch span {
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.12);
+}
+.pd-swatch.is-active { border-color: var(--color-ink); }   /* aktive Variante: klarer dünner Rand */
+
+/* Kaufbereich */
+.pd-buy { margin-bottom: 1.5rem; }
+.pd-qty {
+  display: inline-flex; align-items: center;
+  border: 1px solid var(--color-line);
+  margin-bottom: .9rem;
+}
+.pd-qty__btn {
+  width: 42px; height: 44px; background: none; border: none; cursor: pointer;
+  font-size: 1.1rem; color: var(--color-ink);
+}
+.pd-qty__val {
+  width: 44px; height: 44px; text-align: center;
+  border: none; border-inline: 1px solid var(--color-line);
+  font: inherit; color: var(--color-ink); background: #fff;
+}
+.pd-cta { margin-bottom: .6rem; }
+.pd-buy__note { font-size: .8rem; color: var(--color-muted); margin: 0; }
+
+/* Service-Kurzhinweise */
+.pd-service {
+  border-top: 1px solid var(--color-line);
+  padding-top: 1.25rem; margin: 0 0 1.5rem;
+  display: grid; gap: .75rem;
+}
+.pd-service li { display: grid; gap: .1rem; }
+.pd-service strong { font-size: .85rem; }
+.pd-service span { font-size: .85rem; color: var(--color-muted); }
+
+/* B2B-Hinweis – nur dünne Linie, keine farbige Box */
+.pd-b2b { border-top: 1px solid var(--color-line); padding-top: 1.5rem; }
+.pd-b2b__title { font-size: 1.05rem; margin: 0 0 .4rem; }
+.pd-b2b p { color: var(--color-muted); font-size: .92rem; margin: 0 0 1rem; }
+
+/* --- Details & Maße (Akkordeons) --- */
+.pd-details-wrap { max-width: 820px; }
+.pd-acc { border-top: 1px solid var(--color-line); }
+.pd-acc:last-of-type { border-bottom: 1px solid var(--color-line); }
+.pd-acc summary {
+  list-style: none; cursor: pointer;
+  padding: 1.1rem 0;
+  font-weight: 600; letter-spacing: .02em;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.pd-acc summary::-webkit-details-marker { display: none; }
+.pd-acc summary::after { content: "+"; font-weight: 400; font-size: 1.3rem; color: var(--color-muted); }
+.pd-acc[open] summary::after { content: "–"; }
+.pd-acc__body { padding-bottom: 1.25rem; color: var(--color-muted); }
+.pd-acc__body p { margin: 0 0 .6rem; }
+.pd-specs { margin: 0; display: grid; gap: .55rem; }
+.pd-spec { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px dotted var(--color-line); padding-bottom: .5rem; }
+.pd-spec dt { color: var(--color-muted); }
+.pd-spec dd { margin: 0; color: var(--color-ink); text-align: right; }
+.pd-specs__hint { font-size: .8rem; margin-top: .8rem; }
+
+/* --- Lifestyle-Bereich --- */
+.pd-lifestyle {
+  display: grid; grid-template-columns: 2fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem); align-items: center;
+}
+.pd-lifestyle__media {
+  position: relative; aspect-ratio: 16 / 10;
+  background: var(--color-surface-2); border: 1px solid var(--color-line); overflow: hidden;
+}
+.pd-lifestyle__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pd-lifestyle__text h2 { margin: 0; }
+
+/* --- Passende / zuletzt angesehene Produkte --- */
+.pd-section-title { margin-bottom: clamp(1.25rem, 3vw, 2rem); }
+.related-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: clamp(.6rem, 1.4vw, 1.25rem);
+}
+
+/* --- Lightbox (heller, minimalistischer Overlay) --- */
+.pd-lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(255, 255, 255, .97);
+  display: grid; place-items: center;
+  padding: clamp(1.5rem, 6vw, 4rem);
+}
+.pd-lightbox[hidden] { display: none; }
+.pd-lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.pd-lightbox__close {
+  position: absolute; top: 1rem; right: 1.25rem;
+  width: 44px; height: 44px; border: none; background: none;
+  font-size: 2rem; line-height: 1; cursor: pointer; color: var(--color-ink);
+}
+
+/* --- Mobile sticky Kaufleiste (nur auf schmalen Geräten) --- */
+.pd-buybar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+  display: none;
+  align-items: center; justify-content: space-between; gap: 1rem;
+  background: #fff; border-top: 1px solid var(--color-line);
+  padding: .7rem clamp(1.15rem, 4vw, 1.5rem);
+}
+.pd-buybar__price { font-weight: 600; }
+.pd-buybar .btn { padding-block: .8em; }
+
+/* 11. ============ FOOTER ============ */
+.site-footer {
+  background: var(--color-bg);
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-line);
+  padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
+}
+.footer-grid {
+  display: grid;
+  /* passt sich an 4–6 Spalten an (Startseite hat mehr Spalten als Unterseiten) */
+  grid-template-columns: 1.6fr repeat(auto-fit, minmax(140px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+.footer-brand .brand { color: var(--color-ink); font-size: 1.5rem; }
+.footer-brand p { color: var(--color-muted); max-width: 34ch; margin-top: 1rem; font-size: .95rem; }
+.footer-col h4 {
+  font-family: var(--font-body);
+  font-size: .8rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  margin: 0 0 1rem;
+}
+.footer-col ul { display: grid; gap: .65rem; }
+.footer-col a { color: var(--color-muted); font-size: .95rem; transition: color var(--transition); }
+.footer-col a:hover { color: var(--color-ink); }
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--color-line);
+  font-size: .85rem;
+  color: var(--color-muted);
+}
+.footer-bottom nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+
+/* 12. ============ UTILITIES & ANIMATIONEN ============ */
+
+/* Bildplatzhalter – ERSETZEN durch echte Bilder in /images
+   (Nutzung: <div class="placeholder" data-label="Beschreibung"></div>) */
+.placeholder {
+  position: relative;
+  background:
+    linear-gradient(135deg, #f4f4f4 0%, #ececec 100%);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  color: var(--color-muted);
+  min-height: 120px;
+}
+.placeholder::after {
+  content: "🕶  " attr(data-label);
+  position: relative;
+  font-size: .8rem;
+  letter-spacing: .04em;
+  padding: .4rem .9rem;
+  border: 1px dashed var(--color-line);
+  border-radius: 100px;
+  background: rgba(255,255,255,.7);
+  text-align: center;
+  max-width: 85%;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+.center { text-align: center; }
+.mt-2 { margin-top: 2rem; }
+.hidden { display: none !important; }
+
+/* Nur für Screenreader sichtbar (z. B. H1 im bildbasierten Hero) */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  /* Laufbänder und Slider-Animation statisch anzeigen */
+  .marquee__track { animation: none; transform: none; }
+  .hero-scroll-arrow { animation: none; }
+  .slider-track { scroll-behavior: auto; }
+}
+
+/* Fixer Header überdeckt Anker – Ziel etwas nach unten versetzen */
+#intro { scroll-margin-top: 120px; }
+
+/* 13. ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+  /* Tablet: 3 Produkte pro Reihe */
+  .product-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 960px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-brand { grid-column: 1 / -1; }
+  .split, .split--reverse .split-media { grid-template-columns: 1fr; order: 0; }
+  .split-media { order: -1 !important; }
+  .contact-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  /* Mobil: 2 Produkte pro Reihe */
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 860px) {
+  /* Mobile-Navigation */
+  .nav-toggle { display: flex; }
+  .main-nav {
+    position: fixed;
+    inset: 74px 0 auto 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
+    padding: 1rem clamp(1.15rem, 4vw, 2.5rem) 1.75rem;
+    box-shadow: var(--shadow);
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition), transform var(--transition);
+    max-height: calc(100vh - 74px);
+    overflow-y: auto;
+  }
+  .main-nav.open { transform: none; opacity: 1; pointer-events: auto; }
+  .main-nav ul { flex-direction: column; align-items: stretch; gap: 0; }
+  .main-nav ul li { border-bottom: 1px solid var(--color-line); }
+  .main-nav ul a { display: block; padding: .95rem 0; font-size: 1.05rem; }
+  .main-nav a[aria-current="page"]::after { display: none; }
+  .nav-cta { margin-top: 1.15rem; }
+}
+
+@media (max-width: 700px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  body { font-size: 16px; }
+}
+
+@media (max-width: 440px) {
+  /* Kleine Smartphones: 1 Produkt pro Reihe */
+  .product-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- RESPONSIVE: NEUE STARTSEITEN-KOMPONENTEN ---------- */
+
+/* Firmen-/Vereinsblöcke, Lifestyle & Serviceleiste auf Tablet */
+@media (max-width: 900px) {
+  .feature-block { grid-template-columns: 1fr; gap: 1.5rem; }
+  .feature-block--reverse .fb-media { order: -1; }   /* Bild bleibt oben */
+  .service-bar { grid-template-columns: repeat(3, 1fr); gap: 1.5rem 1rem; }
+  /* Tablet: ~2–2,5 Produktkarten sichtbar */
+  .pcard { flex-basis: 40%; }
+}
+
+/* Lifestyle-Bilder & Schritte untereinander */
+@media (max-width: 760px) {
+  .media-grid { grid-template-columns: 1fr; }
+  .process { grid-template-columns: 1fr; }
+  .service-bar { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Mobil: ~1–1,3 Produktkarten sichtbar (Anschnitt zeigt „weiter wischen") */
+@media (max-width: 600px) {
+  .pcard { flex-basis: 78%; }
+  /* Pfeile mobil ausblenden – Touch-Wischen genügt */
+  .slider-arrows { display: none; }
+}
+
+/* ---------- RESPONSIVE: KOLLEKTIONSSEITE (SONNENBRILLEN) ---------- */
+
+/* Tablet: 2 Spalten, Editorial über volle Breite, Banner ~240–300 px */
+@media (max-width: 900px) {
+  .category-grid { grid-template-columns: repeat(2, 1fr); }
+  .editorial-card { grid-column: 1 / -1; }
+  .category-banner { height: 280px; }
+}
+
+/* Mobil: Banner ~180–240 px */
+@media (max-width: 600px) {
+  .category-banner { height: 210px; }
+}
+
+/* Sehr schmale Geräte: 1 Produkt pro Reihe, Editorial volle Breite */
+@media (max-width: 440px) {
+  .category-grid { grid-template-columns: 1fr; }
+  .editorial-card { grid-column: 1 / -1; }
+}
+
+/* ---------- RESPONSIVE: PRODUKTDETAILSEITE ---------- */
+
+/* Tablet: Verhältnis ~55/45, Infos weiterhin sticht */
+@media (max-width: 1024px) {
+  .pd-layout { grid-template-columns: 55% 1fr; gap: 2rem; }
+  .related-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Tablet schmaler: passende Produkte 2 pro Reihe */
+@media (max-width: 900px) {
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Mobil: Bilder oben, Infos darunter, kein sticky */
+@media (max-width: 760px) {
+  .pd-layout { grid-template-columns: 1fr; }
+  .pd-info { position: static; top: auto; }
+  .pd-gallery { grid-template-columns: 1fr; }   /* ein großes Bild pro Reihe */
+  .pd-lifestyle { grid-template-columns: 1fr; }
+  /* sticky Kaufleiste einblenden, Platz am Seitenende schaffen */
+  .pd-buybar:not([hidden]) { display: flex; }
+  body { padding-bottom: 72px; }
+}
+
+/* Sehr schmale Geräte: passende Produkte bleiben 2-spaltig & lesbar */
+@media (max-width: 440px) {
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
+}

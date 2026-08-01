@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sichtfaktor – Individuelle Sonnenbrillen für Firmen und Vereine</title>
+  <meta name="description" content="Sichtfaktor gestaltet individuelle Sonnenbrillen für Unternehmen, Vereine und Events – gebrandet mit Logo und in euren Farben. Vom Modell bis zur fertigen Kleinserie.">
+  <link rel="stylesheet" href="css/styles.css?v=16">
+  <!-- Favicon: einfach bilder/marke/favicon.png ablegen – wird automatisch eingebunden -->
+  <!-- Bildsystem: alle Bilder liegen im Ordner  bilder/  (siehe bilder/ANLEITUNG.txt).
+       Bewusst im <head>, damit das grosse Startbild sofort geladen wird. -->
+  <script src="assets/js/bilder.js?v=16"></script>
+</head>
+<!-- body.home aktiviert die transparente Navigation über dem Hero -->
+<body class="home">
+
+  <!-- ============ KOPFBEREICH: 1. LAUFBAND (ganz oben) + 2. NAVIGATION ============
+       Header liegt fix oben; die Navigation ist über dem Hero transparent
+       und wird nach dem Hero weiß. -->
+  <header class="site-header" id="siteHeader">
+
+    <!-- 1. DURCHLAUFENDES HEADER-BANNER (Text hier einfach änderbar) -->
+    <div class="marquee marquee--top" role="presentation">
+      <div class="marquee__track" aria-hidden="true">
+        <div class="marquee__group">
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+        </div>
+        <div class="marquee__group">
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. NAVIGATION -->
+    <div class="container nav-bar">
+
+      <!-- Links: Hauptlinks (Desktop) + Hamburger (Mobil) -->
+      <div class="nav-side nav-side--left">
+        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen"
+                aria-expanded="false" aria-controls="mainNav">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-links" aria-label="Hauptnavigation">
+          <a href="unternehmen.html">Für Firmen</a>
+        <a href="vereine.html">Für Vereine</a>
+          <a href="sonnenbrillen.html">Sonnenbrillen</a>
+          <a href="ueber-uns.html">Über uns</a>
+        </nav>
+      </div>
+
+      <!-- Mitte: Logo als Wortmarke (Farbe passt sich automatisch an) -->
+      <a class="nav-logo" href="index.html">Sichtfaktor</a>
+
+      <!-- Rechts: Kontakt + Suche + Warenkorb -->
+      <div class="nav-side nav-side--right">
+        <a class="nav-hide-mobile" href="kontakt.html">Kontakt</a>
+        <button class="nav-icon nav-hide-mobile" type="button" aria-label="Suche">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+          </svg>
+        </button>
+        <a class="nav-icon" href="sonnenbrillen.html" aria-label="Warenkorb">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M6 7h12l-1 13H7L6 7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Mobiles Overlay-Menü (schlicht weiß) -->
+      <div class="nav-menu" id="mainNav">
+        <a href="unternehmen.html">Für Firmen</a>
+        <a href="vereine.html">Für Vereine</a>
+        <a href="sonnenbrillen.html">Sonnenbrillen</a>
+        <a href="ueber-uns.html">Über uns</a>
+        <a href="kontakt.html">Kontakt</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ 3. HERO (Vollbild: Hintergrundbild + zentriertes Logo) ============
+         Bild:  bilder/startseite/hintergrund.jpg
+         Logo:  bilder/marke/logo.png
+         Transparenz/Logogröße -> Variablen in css/styles.css (:root) -->
+    <section class="hero" id="hero">
+      <!-- Für Screenreader/SEO genau eine H1, optisch nicht sichtbar -->
+      <h1 class="visually-hidden">Sichtfaktor – individuelle Sonnenbrillen für Firmen und Vereine</h1>
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <img class="hero-logo" data-bild="marke/logo" alt="">
+      </div>
+      <a class="hero-scroll" href="#intro" aria-label="Nach unten scrollen">
+        <span>Scrollen</span>
+        <span class="hero-scroll-arrow" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ============ 4. UNTERNEHMENSVORSTELLUNG ============ -->
+    <section class="section" id="intro">
+      <div class="container section-head center reveal">
+        <span class="section-eyebrow">Was wir machen</span>
+        <h2>Deine Marke – auf jeder Nase</h2>
+        <p class="lead">Sichtfaktor entwickelt individualisierte Sonnenbrillen für Unternehmen, Vereine, Events und Organisationen. Wir übernehmen Design, Branding und Produktion – du bekommst ein Produkt, das man gerne trägt und das deine Marke sichtbar macht.</p>
+      </div>
+      <!-- Optional: drei kurze Vorteile in einer horizontalen Reihe -->
+      <div class="container">
+        <div class="grid grid-3 reveal" style="margin-top:clamp(2rem,5vw,3.5rem);">
+          <div class="feature">
+            <span class="feature-icon">☀️</span>
+            <div><h3>UV400-Schutz</h3><p>Zertifizierter Schutz in jedem Modell.</p></div>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">🎨</span>
+            <div><h3>Individuelles Design</h3><p>Logo, Farben und Bügeldruck nach Wunsch.</p></div>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">📦</span>
+            <div><h3>Faire Auflagen</h3><p>Schon ab kleinen Stückzahlen realisierbar.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. ANGEBOT FÜR FIRMEN UND VEREINE (2 Spalten, gespiegelt) ============ -->
+    <section class="section">
+      <div class="container">
+
+        <!-- Block 1: Bild links, Text rechts -->
+        <div class="feature-block reveal">
+          <div class="fb-media">
+            <!-- Bild: bilder/startseite/unternehmen.jpg -->
+            <img data-bild="startseite/unternehmen" alt="">
+          </div>
+          <div class="fb-body">
+            <span class="section-eyebrow">Für Unternehmen</span>
+            <h2>Individuelle Sonnenbrillen für Ihr Unternehmen</h2>
+            <p class="lead">Ob als Kundengeschenk, Mitarbeiter-Ausstattung, Merchandise oder Messe-Highlight – gebrandet mit Ihrem Logo und in Ihren Farben. Hochwertig statt klassischer Werbeartikel.</p>
+            <div class="fb-actions">
+              <a class="btn btn-accent" href="unternehmen.html">Zum Firmen-Shop</a>
+              <a class="btn btn-outline" href="kontakt.html?anliegen=projekt">Projekt anfragen</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Block 2: gespiegelt – Bild rechts, Text links -->
+        <div class="feature-block feature-block--reverse reveal">
+          <div class="fb-media">
+            <!-- Bild: bilder/startseite/vereine.jpg -->
+            <img data-bild="startseite/vereine" alt="">
+          </div>
+          <div class="fb-body">
+            <span class="section-eyebrow">Für Vereine &amp; Events</span>
+            <h2>Sonnenbrillen für Vereine, Events und Organisationen</h2>
+            <p class="lead">In euren Vereinsfarben – für Fans, Mitglieder, Sponsoren und Vereinsartikel. Ideal für Turniere, Jubiläen, Festivals und Fanshops.</p>
+            <div class="fb-actions">
+              <a class="btn btn-accent" href="vereine.html">Für Vereine</a>
+              <a class="btn btn-outline" href="kontakt.html?anliegen=projekt">Projekt anfragen</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ 6. ERSTE PRODUKTREIHE: BELIEBTE MODELLE (horizontaler Slider) ============
+         Karten & Daten stammen aus assets/js/products.js -->
+    <section class="section section--surface">
+      <div class="container">
+        <div class="product-row" data-slider>
+          <div class="product-row__head">
+            <h2 class="u-upper">Beliebte Modelle</h2>
+            <div class="slider-arrows">
+              <button class="slider-arrow" type="button" data-prev aria-label="Zurück">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button class="slider-arrow" type="button" data-next aria-label="Weiter">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+          <!-- Produktkarten werden per JavaScript eingefügt -->
+          <div class="slider-track" id="track-popular" role="list" aria-label="Beliebte Modelle"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. LIFESTYLE-/FIRMENBILD-BEREICH ============
+         data-bild-gruppe: Bleibt nach dem Ausblenden optionaler Bilder nichts
+         übrig, entfällt der gesamte Abschnitt statt einer leeren Fläche. -->
+    <section class="section" data-bild-gruppe>
+      <div class="container" data-bild-gruppe>
+        <div class="media-grid reveal" data-bild-gruppe>
+          <!-- data-bild-bereich: optionale Bilder – fehlt die Datei, verschwindet
+               die komplette Kachel inklusive Bildunterschrift. -->
+          <figure class="media-item media-item--tall" data-bild-bereich>
+            <img data-bild="startseite/alltag-1" alt="">
+            <figcaption>Lifestyle</figcaption>
+          </figure>
+          <div class="media-grid__stack" data-bild-gruppe>
+            <figure class="media-item media-item--wide" data-bild-bereich>
+              <img data-bild="startseite/alltag-2" alt="">
+              <figcaption>Firmenprojekt</figcaption>
+            </figure>
+            <figure class="media-item media-item--wide" data-bild-bereich>
+              <img data-bild="startseite/alltag-3" alt="">
+              <figcaption>Verein &amp; Event</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 8. ZWEITES DURCHLAUFENDES TEXTBAND (langsamer) ============ -->
+    <div class="marquee marquee--slow" role="presentation">
+      <div class="marquee__track" aria-hidden="true">
+        <div class="marquee__group">
+          <span class="marquee__item">Individuelle Farben</span>
+          <span class="marquee__item">Logo am Bügel</span>
+          <span class="marquee__item">Eigene Verpackung</span>
+        </div>
+        <div class="marquee__group">
+          <span class="marquee__item">Individuelle Farben</span>
+          <span class="marquee__item">Logo am Bügel</span>
+          <span class="marquee__item">Eigene Verpackung</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 9. ZWEITE PRODUKTREIHE: NEUE MODELLE (gleiche Slider-Komponente) ============ -->
+    <section class="section section--surface">
+      <div class="container">
+        <div class="product-row" data-slider>
+          <div class="product-row__head">
+            <h2 class="u-upper">Neue Modelle</h2>
+            <div class="slider-arrows">
+              <button class="slider-arrow" type="button" data-prev aria-label="Zurück">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button class="slider-arrow" type="button" data-next aria-label="Weiter">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+          <div class="slider-track" id="track-new" role="list" aria-label="Neue Modelle"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 10. INDIVIDUALISIERUNG IN DREI SCHRITTEN ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="section-eyebrow">So funktioniert es</span>
+          <h2 class="u-upper">In drei Schritten zur eigenen Brille</h2>
+        </div>
+        <div class="process reveal">
+          <div class="process__step">
+            <div class="process__num">01</div>
+            <h3>Modell auswählen</h3>
+            <p>Wähle ein Modell und teile uns Farben, Menge und Einsatzzweck mit.</p>
+          </div>
+          <div class="process__step">
+            <div class="process__num">02</div>
+            <h3>Design abstimmen</h3>
+            <p>Wir gestalten deine Brille mit Logo und Farben und stimmen alles gemeinsam ab.</p>
+          </div>
+          <div class="process__step">
+            <div class="process__num">03</div>
+            <h3>Produktion &amp; Lieferung</h3>
+            <p>Deine individuelle Kleinserie wird produziert und pünktlich geliefert.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 11. VORTEILE UND VERTRAUEN (Serviceleiste) ============ -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="service-bar reveal">
+          <div class="service-item"><span class="service-icon">☀️</span><strong>UV400-Schutz</strong><span>in jedem Modell</span></div>
+          <div class="service-item"><span class="service-icon">🎨</span><strong>Individuelle Gestaltung</strong><span>Logo &amp; Farben</span></div>
+          <div class="service-item"><span class="service-icon">💬</span><strong>Persönliche Beratung</strong><span>1:1 Betreuung</span></div>
+          <div class="service-item"><span class="service-icon">🔒</span><strong>Sichere Bezahlung</strong><span>geprüfte Zahlarten</span></div>
+          <div class="service-item"><span class="service-icon">🚚</span><strong>Zuverlässige Lieferung</strong><span>termintreu</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 12. ABSCHLUSS-CTA ============ -->
+    <section class="section">
+      <div class="container cta-band reveal">
+        <h2 class="u-upper">Bereit für eure eigene Sonnenbrille?</h2>
+        <p class="lead">Erzählt uns von eurem Firmen- oder Vereinsprojekt – wir melden uns mit einem unverbindlichen Vorschlag.</p>
+        <div class="cta-actions">
+          <a class="btn btn-accent" href="kontakt.html?anliegen=projekt">Projekt anfragen</a>
+          <a class="btn btn-outline" href="unternehmen.html">Zum Firmen-Shop</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ 13. FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html">Sicht<span>faktor</span></a>
+          <p>Individuelle Sonnenbrillen für Unternehmen, Vereine, Events und Organisationen – gebrandet in eurem Design.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Für Firmen</h4>
+          <ul>
+            <li><a href="unternehmen.html">Firmen-Shop</a></li>
+            <li><a href="unternehmen.html">Individualisierung</a></li>
+            <li><a href="kontakt.html?anliegen=projekt">Projekt anfragen</a></li>
+            <li><a href="kontakt.html">FAQ für Firmen</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="sonnenbrillen.html">Alle Sonnenbrillen</a></li>
+            <li><a href="sonnenbrillen.html">Beliebte Modelle</a></li>
+            <li><a href="sonnenbrillen.html">Neue Modelle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Service</h4>
+          <ul>
+            <li><a href="kontakt.html">Kontakt</a></li>
+            <li><a href="kontakt.html">Versand</a></li>
+            <li><a href="kontakt.html">Rückgabe</a></li>
+            <li><a href="kontakt.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+            <li><a href="datenschutz.html">AGB</a></li>
+            <li><a href="datenschutz.html">Widerruf</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Sichtfaktor. Alle Rechte vorbehalten.</span>
+        <nav aria-label="Sonstiges">
+          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a data-email href="#">E-Mail</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Reihenfolge: erst allgemeine Skripte, dann Produktdaten/Slider -->
+  <script src="js/script.js?v=16"></script>
+  <script src="assets/js/products.js?v=16"></script>
+</body>
+</html>

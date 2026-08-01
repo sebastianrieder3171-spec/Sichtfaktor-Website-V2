@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonnenbrillen | Essential &amp; Signature Collection | Sichtfaktor</title>
+  <meta name="description" content="Entdecke die Essential Collection und Signature Collection von Sichtfaktor – 14 ausgewählte Sonnenbrillen mit klaren Formen und markanten Designs.">
+  <link rel="stylesheet" href="css/styles.css?v=16">
+  <!-- Bildsystem: alle Bilder liegen im Ordner  bilder/  (siehe bilder/ANLEITUNG.txt) -->
+  <script src="assets/js/bilder.js?v=16"></script>
+</head>
+<!-- Kein body.home: Header ist hier von Anfang an weiß & sticky -->
+<body>
+
+  <!-- ============ 1. HEADER (identisch zur Startseite) ============ -->
+  <header class="site-header" id="siteHeader">
+
+    <!-- 1. DURCHLAUFENDES HEADER-BANNER (Text hier einfach änderbar) -->
+    <div class="marquee marquee--top" role="presentation">
+      <div class="marquee__track" aria-hidden="true">
+        <div class="marquee__group">
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+        </div>
+        <div class="marquee__group">
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+          <span class="marquee__item">Individuelle Sonnenbrillen für Firmen und Vereine</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. NAVIGATION -->
+    <div class="container nav-bar">
+
+      <!-- Links: Hauptlinks (Desktop) + Hamburger (Mobil) -->
+      <div class="nav-side nav-side--left">
+        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen"
+                aria-expanded="false" aria-controls="mainNav">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-links" aria-label="Hauptnavigation">
+          <a href="unternehmen.html">Für Firmen</a>
+        <a href="vereine.html">Für Vereine</a>
+          <a href="sonnenbrillen.html" aria-current="page">Sonnenbrillen</a>
+          <a href="ueber-uns.html">Über uns</a>
+        </nav>
+      </div>
+
+      <!-- Mitte: Logo als Wortmarke (Farbe passt sich automatisch an) -->
+      <a class="nav-logo" href="index.html">Sichtfaktor</a>
+
+      <!-- Rechts: Kontakt + Suche + Warenkorb -->
+      <div class="nav-side nav-side--right">
+        <a class="nav-hide-mobile" href="kontakt.html">Kontakt</a>
+        <button class="nav-icon nav-hide-mobile" type="button" aria-label="Suche">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+          </svg>
+        </button>
+        <a class="nav-icon" href="sonnenbrillen.html" aria-label="Warenkorb">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M6 7h12l-1 13H7L6 7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Mobiles Overlay-Menü (schlicht weiß) -->
+      <div class="nav-menu" id="mainNav">
+        <a href="unternehmen.html">Für Firmen</a>
+        <a href="vereine.html">Für Vereine</a>
+        <a href="sonnenbrillen.html" aria-current="page">Sonnenbrillen</a>
+        <a href="ueber-uns.html">Über uns</a>
+        <a href="kontakt.html">Kontakt</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Genau eine H1, barrierearm eingebunden (Kollektionstitel sind H2) -->
+    <h1 class="visually-hidden">Sonnenbrillen – Essential &amp; Signature Collection</h1>
+
+    <!-- ============ 2. BREITER KAMPAGNEN-BANNER (direkt unter dem Header) ============
+         Bild: bilder/sonnenbrillen/banner.jpg (optional)
+         Kein Fullscreen-Hero, kein Slider. -->
+    <section class="category-banner" aria-label="Sonnenbrillen">
+      <img data-bild="sonnenbrillen/banner" alt="">
+      <div class="category-banner__text">
+        <span class="cb-title">Sonnenbrillen</span>
+        <span class="cb-sub">Essential &amp; Signature Collection</span>
+        <span class="cb-desc">Zeitlose Modelle und markante Designs.</span>
+      </div>
+    </section>
+
+    <!-- ============ 3.–7. PRODUKTGRID (Essential + Signature) ============
+         4 Spalten (Desktop). Editorial-Bilder sind Teil des Rasters (2 Spalten breit)
+         und werden per assets/js/products.js an fester Position eingefügt:
+           Essential:  01 02 03 04 · [Editorial] 05 06 · 07
+           Signature:  [Editorial] 01 02 · 03 04 05 06 · 07 -->
+    <section class="section section--tight">
+      <div class="container">
+        <!-- Essential Collection -->
+        <div class="category-grid" id="grid-essential" role="list" aria-label="Essential Collection"></div>
+        <!-- Signature Collection (schließt ohne großen Leerraum an) -->
+        <div class="category-grid" id="grid-signature" role="list" aria-label="Signature Collection"></div>
+      </div>
+    </section>
+
+    <!-- ============ 8. FIRMENHINWEIS ============ -->
+    <section class="section section--lined">
+      <div class="container cta-band reveal">
+        <h2 class="u-upper">Ausgewählte Modelle individualisieren</h2>
+        <p class="lead">Ausgewählte Modelle aus der Essential und Signature Collection können für Unternehmen, Vereine und Events individualisiert werden.</p>
+        <div class="cta-actions">
+          <a class="btn btn-accent" href="unternehmen.html">Zum Firmen-Shop</a>
+          <a class="btn btn-outline" href="kontakt.html?anliegen=projekt">Projekt anfragen</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. SERVICE- & VERTRAUENSBEREICH ============ -->
+    <section class="section section--tight section--lined">
+      <div class="container">
+        <div class="service-bar reveal">
+          <div class="service-item"><span class="service-icon">☀️</span><strong>UV400-Schutz</strong><span>in jedem Modell</span></div>
+          <div class="service-item"><span class="service-icon">👓</span><strong>Moderne Passformen</strong><span>klare Silhouetten</span></div>
+          <div class="service-item"><span class="service-icon">💬</span><strong>Persönlicher Service</strong><span>1:1 Beratung</span></div>
+          <div class="service-item"><span class="service-icon">🔒</span><strong>Sichere Bezahlung</strong><span>geprüfte Zahlarten</span></div>
+          <div class="service-item"><span class="service-icon">🚚</span><strong>Zuverlässige Lieferung</strong><span>termintreu</span></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ 10. FOOTER (identisch zur Startseite) ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html">Sicht<span>faktor</span></a>
+          <p>Individuelle Sonnenbrillen für Unternehmen, Vereine, Events und Organisationen – gebrandet in eurem Design.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Für Firmen</h4>
+          <ul>
+            <li><a href="unternehmen.html">Firmen-Shop</a></li>
+            <li><a href="unternehmen.html">Individualisierung</a></li>
+            <li><a href="kontakt.html?anliegen=projekt">Projekt anfragen</a></li>
+            <li><a href="kontakt.html">FAQ für Firmen</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="sonnenbrillen.html">Alle Sonnenbrillen</a></li>
+            <li><a href="sonnenbrillen.html">Essential Collection</a></li>
+            <li><a href="sonnenbrillen.html">Signature Collection</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Service</h4>
+          <ul>
+            <li><a href="kontakt.html">Kontakt</a></li>
+            <li><a href="kontakt.html">Versand</a></li>
+            <li><a href="kontakt.html">Rückgabe</a></li>
+            <li><a href="kontakt.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+            <li><a href="datenschutz.html">AGB</a></li>
+            <li><a href="datenschutz.html">Widerruf</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Sichtfaktor. Alle Rechte vorbehalten.</span>
+        <nav aria-label="Sonstiges">
+          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a data-email href="#">E-Mail</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Reihenfolge: erst allgemeine Skripte, dann Produktdaten/Raster -->
+  <script src="js/script.js?v=16"></script>
+  <script src="assets/js/products.js?v=16"></script>
+</body>
+</html>

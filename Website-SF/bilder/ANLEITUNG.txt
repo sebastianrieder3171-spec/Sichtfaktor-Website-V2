@@ -1,0 +1,115 @@
+SICHTFAKTOR – BILDER
+====================
+
+Alle Bilder der Website liegen in diesem Ordner. Mehr musst du nicht kennen.
+Es ist NIE nötig, eine Programmdatei zu öffnen.
+
+Erlaubte Dateiformate:  .webp  .jpg  .jpeg  .png
+Die Website sucht automatisch in dieser Reihenfolge: webp, jpg, jpeg, png.
+
+
+SO GEHT ES
+----------
+Bild hinzufügen   Datei mit dem unten genannten Namen in den passenden
+                  Ordner legen. Fertig.
+Bild austauschen  Neue Datei mit demselben Namen darüberspeichern. Fertig.
+Bild löschen      Datei löschen.
+                  Pflichtbild  -> grauer Hinweiskasten mit dem erwarteten Pfad
+                  Optional     -> der Bereich verschwindet vollständig
+
+                  Ausnahme: Bereiche mit eigenem Text bleiben immer stehen
+                  und zeigen nur eine neutrale Bildfläche – also die beiden
+                  Kollektions-Kacheln auf der Sonnenbrillen-Seite, der
+                  Lifestyle-Bereich auf den Produktseiten und alle
+                  Produktkarten.
+
+Danach die Seite normal neu laden (Strg+R bzw. Cmd+R).
+Dateinamen immer klein schreiben, ohne Leerzeichen und ohne Umlaute.
+Andere Dateinamen werden ignoriert.
+
+
+1) MARKE   bilder/marke/
+---------------------------------------------------------------------------
+  logo.png              Pflicht   Logo im Startbild             1600 px breit
+  favicon.png           optional  Symbol im Browser-Tab         512 x 512
+
+
+2) STARTSEITE   bilder/startseite/
+---------------------------------------------------------------------------
+  hintergrund.jpg       Pflicht   großes Bild ganz oben         2200 x 1240
+  unternehmen.jpg       Pflicht   Block "Für Unternehmen"       1200 x 900
+  vereine.jpg           Pflicht   Block "Für Vereine & Events"  1200 x 900
+  alltag-1.jpg          optional  große Kachel links            1600 x 1200
+  alltag-2.jpg          optional  kleine Kachel oben             800 x 600
+  alltag-3.jpg          optional  kleine Kachel unten            800 x 600
+
+
+3) FÜR UNTERNEHMEN   bilder/unternehmen/
+---------------------------------------------------------------------------
+  vorteile.jpg          Pflicht   Foto im Abschnitt "Die Wirkung"  1200 x 900
+
+
+4) FÜR VEREINE   bilder/vereine/
+---------------------------------------------------------------------------
+  gemeinschaft.jpg      Pflicht   Foto "Ein Look, der verbindet"   1200 x 900
+
+
+5) ÜBER UNS   bilder/ueber-uns/
+---------------------------------------------------------------------------
+  team.jpg              Pflicht   Foto Team / Marke             1200 x 900
+  ausblick.jpg          optional  Foto eigene Kollektion        1200 x 900
+
+
+6) SONNENBRILLEN   bilder/sonnenbrillen/
+---------------------------------------------------------------------------
+  banner.jpg                 optional  breites Bild oben        2400 x 900
+  kollektion-essential.jpg   optional  Kachel im Raster         1000 x 1250
+  kollektion-signature.jpg   optional  Kachel im Raster         1000 x 1250
+
+
+7) PRODUKTE   bilder/produkte/<modell>/
+---------------------------------------------------------------------------
+Ein Ordner je Sonnenbrille. Der Ordnername ist der Modellname, klein
+geschrieben. Vorhandene Ordner:
+
+  Essential Collection        Signature Collection
+    alpenblick                  resino
+    sonnenblick                 resina
+    gipfelblick                 viento
+    modeblick                   vientina
+    waldblick                   tierra
+    seeblick                    tierrina
+    abendblick
+    himmelblick
+
+Neues Modell: einfach einen neuen Ordner mit dem Modellnamen anlegen
+(und mir kurz Bescheid geben, damit das Modell in die Liste kommt).
+
+In jedem Modellordner sind diese Dateinamen erlaubt
+(Reihenfolge = Reihenfolge in der Bildergalerie):
+
+  hauptbild.jpg       Pflicht   erstes Galeriebild und Bild in allen
+                                Übersichten, Slidern und Vorschlägen
+  ansicht-2.jpg       optional  zweite Ansicht
+  ansicht-3.jpg       optional  dritte Ansicht
+  model.jpg           optional  Brille getragen
+  detail.jpg          optional  Detailaufnahme
+  gravur.jpg          optional  Gravur
+  etui.jpg            optional  Etui
+  verpackung.jpg      optional  Verpackung
+  anwendung.jpg       optional  im Einsatz – zusätzlich im großen
+                                Lifestyle-Bereich unten auf der Produktseite
+
+Empfohlene Größe: quadratisch, ca. 1400 x 1400 (anwendung.jpg 1600 x 2000).
+Produktfreisteller am besten auf hellem, ruhigem Hintergrund.
+
+
+WAS AUTOMATISCH PASSIERT
+------------------------
+- Fehlende optionale Bilder hinterlassen keine leeren Flächen.
+- Fehlende Pflichtbilder zeigen den erwarteten Dateipfad an.
+- Das große Startbild und das Hauptbild einer Brille werden bevorzugt
+  geladen, alle übrigen Bilder erst beim Herunterscrollen.
+- Ausgetauschte Bilder erscheinen nach einem normalen Neuladen sofort.
+- Alternativtexte und Bildgrößen sind zentral hinterlegt und müssen nicht
+  gepflegt werden.

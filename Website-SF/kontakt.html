@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kontakt & Projektanfrage | Sichtfaktor</title>
   <meta name="description" content="Kontaktiere Sichtfaktor für individualisierte Sonnenbrillen. Stelle deine Projektanfrage für Unternehmen, Vereine oder Events – wir melden uns zeitnah.">
-  <link rel="stylesheet" href="css/styles.css?v=16">
+  <link rel="stylesheet" href="css/styles.css?v=29">
   <!-- Bildsystem: alle Bilder liegen im Ordner  bilder/  (siehe bilder/ANLEITUNG.txt) -->
-  <script src="assets/js/bilder.js?v=16"></script>
+  <script src="assets/js/bilder.js?v=29"></script>
 </head>
 <body>
 
@@ -47,8 +47,8 @@
         </nav>
       </div>
 
-      <!-- Mitte: Logo als Wortmarke (Farbe passt sich automatisch an) -->
-      <a class="nav-logo" href="index.html">Sichtfaktor</a>
+      <!-- Mitte: Bildlogo (ueber dem Hero automatisch die helle Variante) -->
+      <a class="nav-logo" href="index.html"><img class="nav-logo__bild" src="bilder/marke/logo-quer.png?v=29" alt="Sichtfaktor" width="900" height="237"></a>
 
       <!-- Rechts: Kontakt + Suche + Warenkorb -->
       <div class="nav-side nav-side--right">
@@ -102,7 +102,7 @@
               </div>
               <div class="field">
                 <label for="email">E-Mail <span class="req">*</span></label>
-                <input type="email" id="email" name="email" required autocomplete="email" placeholder="name@beispiel.de">
+                <input type="email" id="email" name="email" required autocomplete="email" placeholder="name@beispiel.at">
               </div>
             </div>
 
@@ -136,30 +136,28 @@
           </form>
         </div>
 
-        <!-- Kontakt-Infos (Platzhalter – später ersetzen) -->
+        <!-- Kontakt-Infos -->
         <aside class="contact-aside reveal">
           <h3>Direkter Kontakt</h3>
           <div class="contact-item">
             <span class="ci-icon">✉️</span>
             <div>
               <strong>E-Mail</strong>
-              <span><a data-email href="#">info@sichtfaktor.de</a></span>
+              <span><a data-email href="mailto:hello@sichtfaktor.com">hello@sichtfaktor.com</a></span>
             </div>
           </div>
           <div class="contact-item">
             <span class="ci-icon">📞</span>
             <div>
               <strong>Telefon</strong>
-              <!-- PLATZHALTER: echte Nummer eintragen -->
-              <span>+49 (0) 000 000 000</span>
+              <span><a href="tel:+436641645133">+43 664 1645133</a></span>
             </div>
           </div>
           <div class="contact-item">
             <span class="ci-icon">📍</span>
             <div>
               <strong>Adresse</strong>
-              <!-- PLATZHALTER: echte Adresse eintragen -->
-              <span>Musterstraße 1<br>00000 Musterstadt</span>
+              <span>Solbachsiedlung 7<br>3171 Kleinzell<br>Österreich</span>
             </div>
           </div>
           <div class="contact-item">
@@ -169,10 +167,6 @@
               <span>Mo–Fr, 9–17 Uhr</span>
             </div>
           </div>
-          <p class="muted" style="font-size:.82rem;margin-top:1rem;margin-bottom:0;">
-            <em>Alle Kontaktdaten sind Platzhalter und müssen ersetzt werden
-            (auch in <code>js/script.js</code> die Variable <code>KONTAKT_EMAIL</code>).</em>
-          </p>
         </aside>
 
       </div>
@@ -185,12 +179,12 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="brand" href="index.html">Sicht<span>faktor</span></a>
+          <a class="brand" href="index.html"><img src="bilder/marke/logo-quer.png?v=29" alt="Sichtfaktor" width="900" height="237"></a>
           <p>Individualisierte Sonnenbrillen für Unternehmen, Vereine, Events und Organisationen.</p>
         </div>
         <div class="footer-col"><h4>Angebot</h4><ul><li><a href="unternehmen.html">Für Unternehmen</a></li><li><a href="vereine.html">Für Vereine</a></li><li><a href="sonnenbrillen.html">Sonnenbrillen</a></li></ul></div>
         <div class="footer-col"><h4>Unternehmen</h4><ul><li><a href="ueber-uns.html">Über uns</a></li><li><a href="kontakt.html">Kontakt</a></li><li><a href="kontakt.html?anliegen=projekt">Projekt anfragen</a></li></ul></div>
-        <div class="footer-col"><h4>Rechtliches</h4><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a data-email href="#">E-Mail</a></li></ul></div>
+        <div class="footer-col"><h4>Rechtliches</h4><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a data-email href="mailto:hello@sichtfaktor.com">E-Mail</a></li></ul></div>
       </div>
       <div class="footer-bottom">
         <span>© <span data-year>2026</span> Sichtfaktor. Alle Rechte vorbehalten.</span>
@@ -199,6 +193,6 @@
     </div>
   </footer>
 
-  <script src="js/script.js?v=16"></script>
+  <script src="js/script.js?v=29"></script>
 </body>
 </html>

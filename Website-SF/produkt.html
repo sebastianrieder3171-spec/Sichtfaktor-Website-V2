@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Titel & Description werden per JS aus dem Produkt gesetzt (SEO) -->
   <title>Sonnenbrille | Sichtfaktor</title>
-  <meta name="description" content="Produktdetails einer Sichtfaktor-Sonnenbrille – Farben, Maße und Individualisierungsmöglichkeiten.">
-  <link rel="stylesheet" href="css/styles.css?v=16">
+  <meta name="description" content="Produktdetails einer Sichtfaktor-Sonnenbrille – Farben und Individualisierungsmöglichkeiten.">
+  <link rel="stylesheet" href="css/styles.css?v=29">
   <!-- Bildsystem: alle Bilder liegen im Ordner  bilder/  (siehe bilder/ANLEITUNG.txt) -->
-  <script src="assets/js/bilder.js?v=16"></script>
+  <script src="assets/js/bilder.js?v=29"></script>
 </head>
 <!-- Kein body.home: Header ist von Anfang an weiß & sticky -->
 <body>
@@ -49,8 +49,8 @@
         </nav>
       </div>
 
-      <!-- Mitte: Logo als Wortmarke (Farbe passt sich automatisch an) -->
-      <a class="nav-logo" href="index.html">Sichtfaktor</a>
+      <!-- Mitte: Bildlogo (ueber dem Hero automatisch die helle Variante) -->
+      <a class="nav-logo" href="index.html"><img class="nav-logo__bild" src="bilder/marke/logo-quer.png?v=29" alt="Sichtfaktor" width="900" height="237"></a>
 
       <!-- Rechts: Kontakt + Suche + Warenkorb -->
       <div class="nav-side nav-side--right">
@@ -93,10 +93,10 @@
       </div>
     </section>
 
-    <!-- Produktdetails & Maße (Akkordeons) -->
+    <!-- Produktdetails (Akkordeons) -->
     <section class="section section--tight">
       <div class="container pd-details-wrap">
-        <div class="pd-details" id="pd-details"><!-- JS: Beschreibung, Merkmale, Maße, Pflege, Versand --></div>
+        <div class="pd-details" id="pd-details"><!-- JS: Beschreibung, Merkmale, Pflege, Versand und Rückgabe --></div>
       </div>
     </section>
 
@@ -144,7 +144,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="brand" href="index.html">Sicht<span>faktor</span></a>
+          <a class="brand" href="index.html"><img src="bilder/marke/logo-quer.png?v=29" alt="Sichtfaktor" width="900" height="237"></a>
           <p>Individuelle Sonnenbrillen für Unternehmen, Vereine, Events und Organisationen – gebrandet in eurem Design.</p>
         </div>
         <div class="footer-col">
@@ -187,15 +187,15 @@
         <span>© <span data-year>2026</span> Sichtfaktor. Alle Rechte vorbehalten.</span>
         <nav aria-label="Sonstiges">
           <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
-          <a data-email href="#">E-Mail</a>
+          <a data-email href="mailto:hello@sichtfaktor.com">E-Mail</a>
         </nav>
       </div>
     </div>
   </footer>
 
   <!-- Reihenfolge: allgemeine Skripte -> Produktdaten -> Detailseiten-Logik -->
-  <script src="js/script.js?v=16"></script>
-  <script src="assets/js/products.js?v=16"></script>
-  <script src="assets/js/product-detail.js?v=16"></script>
+  <script src="js/script.js?v=29"></script>
+  <script src="assets/js/products.js?v=29"></script>
+  <script src="assets/js/product-detail.js?v=29"></script>
 </body>
 </html>

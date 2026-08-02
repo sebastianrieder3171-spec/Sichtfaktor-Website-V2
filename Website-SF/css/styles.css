@@ -40,6 +40,8 @@
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
                Helvetica, Arial, sans-serif;
   --header-h: 66px;                     /* Höhe der Navigationsleiste */
+  --nav-logo-h: 30px;                   /* Höhe des Logos im Header   */
+  --footer-logo-h: 38px;                /* Höhe des Logos in der Fußzeile */
 
   /* --- BRILLEN-PRODUKTBILDER (gilt für ALLE Produktkarten der Website) ---
      Hier zentral das Seitenverhältnis der Bildfläche ändern. */
@@ -266,14 +268,23 @@ body.home .site-header.scrolled {
 }
 .nav-bar a:hover { opacity: .65; }
 
-/* Zentrales Logo als Wortmarke – passt Farbe automatisch an (gut lesbar) */
+/* Zentrales Bildlogo. Höhe zentral über --nav-logo-h steuerbar.
+   Über dem Hero-Bild wird automatisch die helle Logovariante gezeigt. */
 .nav-logo {
   justify-self: center;
-  font-weight: 800;
-  font-size: 1.15rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
 }
+.nav-logo__bild {
+  height: var(--nav-logo-h);
+  width: auto;
+  display: block;
+}
+.nav-logo__bild--hell { display: none; }
+
+/* Startseite über dem Hero: helle Variante statt der dunklen */
+body.home .site-header:not(.scrolled) .nav-logo__bild { display: none; }
+body.home .site-header:not(.scrolled) .nav-logo__bild--hell { display: block; }
 
 /* Icon-Buttons (Suche, Warenkorb) */
 .nav-icon {
@@ -929,24 +940,26 @@ body.home .site-header:not(.scrolled) .nav-toggle span { background: #fff; }
   letter-spacing: .12em;
   font-weight: 700;
 }
-/* Viel Abstand zwischen Bild und Text, Texte linksbündig */
+/* Ruhiger, gleichmäßiger Textblock: alle Abstände kommen aus dem gap,
+   die Einzelelemente haben bewusst keine eigenen Ränder. */
 .pcard-body {
-  padding-top: 1.1rem;
+  padding-top: .8rem;
   display: flex;
   flex-direction: column;
-  gap: .3rem;
+  gap: .35rem;
   text-align: left;
 }
 .pcard-name { font-size: 1.05rem; letter-spacing: .04em; margin: 0; }
 .pcard-color { color: var(--color-muted); font-size: .9rem; margin: 0; }
-.pcard-dots { display: flex; gap: .4rem; margin: .2rem 0; }
+.pcard-dots { display: flex; gap: .4rem; margin: 0; }
 .pcard-dot {
   width: 12px; height: 12px; border-radius: 50%;
   border: 1px solid rgba(0,0,0,.15);
 }
-.pcard-price { font-size: .95rem; font-weight: 600; margin: .1rem 0 .6rem; }
+.pcard-price { font-size: .95rem; font-weight: 600; margin: 0; }
 .pcard-cta {
   align-self: flex-start;
+  margin-top: .45rem;
   font-size: .82rem;
   font-weight: 600;
   letter-spacing: .06em;
@@ -1100,7 +1113,12 @@ body.home .site-header:not(.scrolled) .nav-toggle span { background: #fff; }
 }
 .gcard-cart:hover { border-color: var(--color-ink); }
 .gcard-cart svg { width: 16px; height: 16px; }
-.gcard-body { padding: .7rem .1rem 0; }
+.gcard-body {
+  padding: .6rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;              /* gleicher Rhythmus wie in den Slider-Karten */
+}
 .gcard-row {
   display: flex; align-items: baseline; justify-content: space-between; gap: .6rem;
 }
@@ -1115,7 +1133,7 @@ body.home .site-header:not(.scrolled) .nav-toggle span { background: #fff; }
   margin-top: .1rem;
 }
 .gcard-price { font-size: .92rem; font-weight: 600; white-space: nowrap; }
-.gcard .pcard-dots { margin-bottom: .45rem; }
+.gcard .pcard-dots { margin: 0; }   /* Abstand kommt aus dem gap von .gcard-body */
 
 /* --- Editorial-Kachel im Raster (2 Spalten breit) --- */
 .editorial-card {
@@ -1175,7 +1193,9 @@ body.home .site-header:not(.scrolled) .nav-toggle span { background: #fff; }
   align-self: start;
 }
 
-/* Bildergalerie – 2-Spalten-Raster, gleiche Bildverhältnisse */
+/* Bildergalerie – 2-Spalten-Raster, alle Kacheln gleich groß.
+   Randlose Darstellung: keine graue Bildfläche, kein Rahmen, kein
+   Innenabstand. Das Bild füllt die Kachel vollständig aus. */
 .pd-gallery {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1185,16 +1205,18 @@ body.home .site-header:not(.scrolled) .nav-toggle span { background: #fff; }
   position: relative;
   margin: 0;
   aspect-ratio: 1 / 1;
-  background: var(--color-surface-2);   /* sehr hellgraue Bildfläche */
-  border: 1px solid var(--color-line);
   overflow: hidden;
   cursor: zoom-in;
 }
 .pd-img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
+  padding: 0;
+  object-position: center center;
 }
-.pd-img--contain { object-fit: contain; padding: clamp(1rem, 3vw, 2.2rem); }
+/* Alle Produktbilder sind quadratisch wie die Kachel – cover zeigt sie
+   dadurch vollständig, ohne Verzerrung und ohne Beschnitt. */
+.pd-img--contain { object-fit: cover; }
 .pd-img--cover   { object-fit: cover; }
 
 /* --- Produktinformationen (rechts) --- */
@@ -1251,6 +1273,39 @@ body.home .site-header:not(.scrolled) .nav-toggle span { background: #fff; }
 .pd-cta { margin-bottom: .6rem; }
 .pd-buy__note { font-size: .8rem; color: var(--color-muted); margin: 0; }
 
+/* --- Staffelpreise (erscheint nur bei Produkten mit Preisstaffel) ---
+   Nutzt ausschließlich vorhandene Schrift, Farben und Linien. */
+.pd-preis { margin-bottom: 1.5rem; }
+.pd-preis .pd-price { margin-bottom: .3rem; }
+.pd-price__unit { font-weight: 400; color: var(--color-muted); }
+.pd-price__meta {
+  margin: 0;
+  font-size: .8rem; line-height: 1.6;
+  color: var(--color-muted);
+}
+.pd-calc {
+  margin: 0 0 .9rem;
+  padding-top: .85rem;
+  border-top: 1px solid var(--color-line);
+}
+.pd-calc p { margin: 0; }
+.pd-calc__unit { font-size: 1.05rem; font-weight: 400; }
+.pd-calc__unit strong { font-weight: 600; }
+.pd-calc__sum { margin-top: .2rem; font-size: .9rem; color: var(--color-muted); }
+.pd-calc__sum strong { color: var(--color-ink); font-weight: 600; }
+.pd-calc__hint { margin-top: .45rem; font-size: .78rem; color: var(--color-muted); }
+.pd-staffel { border-top: 1px solid var(--color-line); margin-bottom: 1rem; }
+.pd-staffel summary {
+  list-style: none; cursor: pointer;
+  padding: .8rem 0;
+  font-size: .82rem; font-weight: 600; letter-spacing: .02em;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.pd-staffel summary::-webkit-details-marker { display: none; }
+.pd-staffel summary::after { content: "+"; font-weight: 400; font-size: 1.15rem; color: var(--color-muted); }
+.pd-staffel[open] summary::after { content: "–"; }
+.pd-staffel__body { padding-bottom: 1rem; font-size: .85rem; }
+
 /* Service-Kurzhinweise */
 .pd-service {
   border-top: 1px solid var(--color-line);
@@ -1262,6 +1317,33 @@ body.home .site-header:not(.scrolled) .nav-toggle span { background: #fff; }
 .pd-service span { font-size: .85rem; color: var(--color-muted); }
 
 /* B2B-Hinweis – nur dünne Linie, keine farbige Box */
+/* Firmenedition – eigener, abgesetzter Bereich unter dem Kaufbereich.
+   Dezente Grünfläche, damit er sich vom Privatkundenbereich abhebt.
+   Schrift, Größen und Rundung kommen aus dem bestehenden Design. */
+.pd-firma {
+  margin-bottom: 1.5rem;
+  padding: 1.35rem 1.4rem 1.5rem;
+  background: #f4f8f5;                        /* sehr helle Grünfläche */
+  border: 1px solid rgba(31, 77, 58, .13);
+  border-radius: var(--radius);
+}
+.pd-firma__title { font-size: 1.05rem; margin: 0 0 .45rem; }
+.pd-firma p { color: var(--color-muted); font-size: .92rem; line-height: 1.65; margin: 0 0 1.1rem; }
+
+/* Nur dieser eine Button ist dunkelgrün – bewusst eng auf .pd-firma begrenzt,
+   damit keine anderen Buttons der Website die Farbe erben. */
+.pd-firma .btn-firma {
+  width: 100%;
+  background: #1f4d3a;
+  border-color: #1f4d3a;
+  color: #fff;
+}
+.pd-firma .btn-firma:hover {
+  background: #173b2d;
+  border-color: #173b2d;
+  transform: translateY(-2px);
+}
+
 .pd-b2b { border-top: 1px solid var(--color-line); padding-top: 1.5rem; }
 .pd-b2b__title { font-size: 1.05rem; margin: 0 0 .4rem; }
 .pd-b2b p { color: var(--color-muted); font-size: .92rem; margin: 0 0 1rem; }
@@ -1346,7 +1428,8 @@ body.home .site-header:not(.scrolled) .nav-toggle span { background: #fff; }
   gap: 2.5rem;
   margin-bottom: 3rem;
 }
-.footer-brand .brand { color: var(--color-ink); font-size: 1.5rem; }
+.footer-brand .brand { color: var(--color-ink); font-size: 1.5rem; display: inline-block; }
+.footer-brand .brand img { height: var(--footer-logo-h); width: auto; display: block; }
 .footer-brand p { color: var(--color-muted); max-width: 34ch; margin-top: 1rem; font-size: .95rem; }
 .footer-col h4 {
   font-family: var(--font-body);

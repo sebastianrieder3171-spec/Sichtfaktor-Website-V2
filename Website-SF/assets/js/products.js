@@ -23,17 +23,49 @@
 /* 1. ================= STANDARDWERTE JE KOLLEKTION =================
    Unbekannte technische Angaben bleiben als editierbare Platzhalter
    („Bitte ergänzen“) – es werden KEINE Eigenschaften erfunden. */
+
+/* Texte, die für BEIDE Kollektionen identisch sind – hier einmal pflegen. */
+const PFLEGE =
+  "Reinige die Gläser mit lauwarmem Wasser, einem milden Spülmittel oder einem " +
+  "geeigneten Brillenreinigungsspray und trockne sie anschließend vorsichtig mit " +
+  "einem sauberen Mikrofasertuch. Verwende kein heißes Wasser und reinige die " +
+  "Gläser nicht mit Kleidung, Papierhandtüchern oder anderen rauen Materialien, " +
+  "da Schmutzpartikel und Fasern die Oberfläche zerkratzen können.";
+
+/* Muss wortgleich mit Widerrufsbelehrung und AGB bleiben. */
+const RUECKGABE =
+  "Für nicht individualisierte Produkte gilt das gesetzliche Rücktrittsrecht. " +
+  "Sobald ein Produkt nach deinen persönlichen Vorgaben individualisiert, graviert " +
+  "oder speziell angefertigt wurde, besteht kein Rücktritts- beziehungsweise " +
+  "Rückgaberecht. Deine gesetzlichen Gewährleistungsrechte bei mangelhafter oder " +
+  "fehlerhaft gelieferter Ware bleiben davon unberührt.";
+
+/* Staffelpreise: netto je Stück ab der jeweiligen Menge.
+   Sobald ein Produkt (oder eine Kollektion) das Feld "staffel" hat, zeigt die
+   Produktseite den Mengenrechner statt des einfachen Preises. */
+const STAFFEL_STANDARD = {
+  mindestmenge: 10,
+  ustProzent: 20,
+  stufen: [
+    { ab:  10, netto: 11.58 },
+    { ab:  50, netto: 10.50 },
+    { ab: 100, netto:  9.90 },
+    { ab: 200, netto:  9.50 },
+    { ab: 500, netto:  8.90 }
+  ]
+};
+
 const COLLECTION_DEFAULTS = {
   essential: {
     collectionLabel: "Essential Collection",
     shortDescription: "Eine klare, vielseitige Sonnenbrille für Alltag und Freizeit.",
     description: "Ausführliche Produktbeschreibung ergänzen. Die Essential Collection steht für klare Formen und unkomplizierte Passformen.",
     lifestyleHeadline: "Entwickelt für den Alltag",
-    care: "Pflegehinweise ergänzen: mit einem weichen Tuch reinigen, im Etui aufbewahren, Gläser nicht trocken abwischen.",
-    features: { uvProtection: "Bitte ergänzen", lens: "Bitte ergänzen", frameMaterial: "Bitte ergänzen", fit: "Bitte ergänzen", weight: "Bitte ergänzen" },
-    measurements: { frameWidth: "Bitte ergänzen", lensWidth: "Bitte ergänzen", lensHeight: "Bitte ergänzen", bridgeWidth: "Bitte ergänzen", templeLength: "Bitte ergänzen" },
-    shipping: "Lieferzeit und Versandkosten werden im Checkout angezeigt.",
-    returns: "Informationen gemäß tatsächlicher Rückgaberegelung.",
+    care: PFLEGE,
+    features: { uvProtection: "UV 400", filterCategory: "Kategorie 3", frameMaterial: "Bitte ergänzen", fit: "Bitte ergänzen", weight: "Bitte ergänzen" },
+    shipping: "Die durchschnittliche Lieferzeit beträgt 5–7 Werktage.",
+    returns: RUECKGABE,
+    staffel: STAFFEL_STANDARD,   /* gilt für alle 8 Essential-Modelle */
     customizable: true
   },
   signature: {
@@ -41,11 +73,12 @@ const COLLECTION_DEFAULTS = {
     shortDescription: "Ein markantes Modell mit ausdrucksstarken Details.",
     description: "Ausführliche Produktbeschreibung ergänzen. Die Signature Collection steht für ausdrucksstärkere Silhouetten und charakteristische Details.",
     lifestyleHeadline: "Ein Modell mit Charakter",
-    care: "Pflegehinweise ergänzen: mit einem weichen Tuch reinigen, im Etui aufbewahren, Gläser nicht trocken abwischen.",
-    features: { uvProtection: "Bitte ergänzen", lens: "Bitte ergänzen", frameMaterial: "Bitte ergänzen", fit: "Bitte ergänzen", weight: "Bitte ergänzen" },
-    measurements: { frameWidth: "Bitte ergänzen", lensWidth: "Bitte ergänzen", lensHeight: "Bitte ergänzen", bridgeWidth: "Bitte ergänzen", templeLength: "Bitte ergänzen" },
-    shipping: "Lieferzeit und Versandkosten werden im Checkout angezeigt.",
-    returns: "Informationen gemäß tatsächlicher Rückgaberegelung.",
+    care: PFLEGE,
+    features: { uvProtection: "UV 400", filterCategory: "Kategorie 3", frameMaterial: "Bitte ergänzen", fit: "Bitte ergänzen", weight: "Bitte ergänzen" },
+    shipping: "Die durchschnittliche Lieferzeit beträgt 25–30 Werktage.",
+    returns: RUECKGABE,
+    ustHinweis: "inkl. 20 % USt.",   /* Privatkundenpreis ist brutto        */
+    firmenedition: true,             /* Hinweisbereich für Firmenkunden     */
     customizable: true
   }
 };
@@ -54,82 +87,90 @@ const COLLECTION_DEFAULTS = {
 /* 2. ================= PRODUKTDATEN =================
    Felder: id, collection, name, color, price, image (Karten-Thumbnail),
            badge, colors (Varianten als {name,value,productId}), link, alt.
-   Weitere Detailfelder (images, features, measurements …) liefert getProduct(). */
+   Weitere Detailfelder (images, features …) liefert getProduct(). */
 const products = {
 
   /* --- Essential Collection: 8 Modelle --- */
   essential: [
-    { id: "alpenblick", collection: "essential", name: "ALPENBLICK", color: "Black Smoke", price: "49,00 €",
+    { id: "alpenblick", collection: "essential", name: "ALPENBLICK", color: "Schwarz / Blau", price: "49,00 €",
       badge: "BESTSELLER",
-      colors: [ {name:"Black Smoke", value:"#111111", productId:"alpenblick"}, {name:"Tortoise Brown", value:"#74513a", productId:"sonnenblick"} ],
-      link: "produkt.html?id=alpenblick", alt: "Alpenblick Sonnenbrille in Black Smoke" },
+      colors: [ {name:"Schwarz", value:"#111111"}, {name:"Blau", value:"#1f4f9c"} ],
+      link: "produkt.html?id=alpenblick", alt: "Alpenblick Sonnenbrille in Black Smoke",
+      description: "Der Alpenblick verbindet tiefblaue Gläser mit dem Gefühl eines sonnigen Tages in den Bergen. Er erinnert an einen klaren blauen Himmel, weite Ausblicke und den Blick auf die Alpen während einer Wanderung. Der schwarze Rahmen verleiht dem Modell einen zeitlosen und markanten Charakter, während die blauen Gläser für Natur, Freiheit und schöne Tage in den Bergen stehen." },
 
-    { id: "sonnenblick", collection: "essential", name: "SONNENBLICK", color: "Tortoise Brown", price: "49,00 €",
+    { id: "sonnenblick", collection: "essential", name: "SONNENBLICK", color: "Schwarz / Gelb", price: "49,00 €",
       badge: "",
-      colors: [ {name:"Tortoise Brown", value:"#74513a", productId:"sonnenblick"}, {name:"Transparent Grey", value:"#b9b9b9", productId:"gipfelblick"} ],
-      link: "produkt.html?id=sonnenblick", alt: "Sonnenblick Sonnenbrille in Tortoise Brown" },
+      colors: [ {name:"Schwarz", value:"#111111"}, {name:"Gelb", value:"#e3b93c"} ],
+      link: "produkt.html?id=sonnenblick", alt: "Sonnenblick Sonnenbrille in Tortoise Brown",
+      description: "Der Sonnenblick steht für helle Tage, warme Sonnenstrahlen und das gute Gefühl, draußen unterwegs zu sein. Die gelben Gläser greifen die Farbe und das Licht der Sonne auf. Ob beim Wandern, bei einem Ausflug oder im Alltag – Sonnenbrille auf und den schönen Tag genießen." },
 
-    { id: "gipfelblick", collection: "essential", name: "GIPFELBLICK", color: "Transparent Grey", price: "49,00 €",
+    { id: "gipfelblick", collection: "essential", name: "GIPFELBLICK", color: "Schwarz / Grau", price: "49,00 €",
       badge: "",
-      colors: [ {name:"Transparent Grey", value:"#b9b9b9", productId:"gipfelblick"}, {name:"Olive Green", value:"#5c6b3c", productId:"modeblick"} ],
-      link: "produkt.html?id=gipfelblick", alt: "Gipfelblick Sonnenbrille in Transparent Grey" },
+      colors: [ {name:"Schwarz", value:"#111111"}, {name:"Grau", value:"#8a8a8a"} ],
+      link: "produkt.html?id=gipfelblick", alt: "Gipfelblick Sonnenbrille in Transparent Grey",
+      description: "Der Gipfelblick ist von den grauen Gläsern und den Farben steiniger Berggipfel inspiriert. Sie erinnern an Felsen, Bergkämme und den Blick in die Berge. Der schwarze Rahmen unterstreicht den geradlinigen und zeitlosen Stil des Modells. Eine Brille für alle, die gerne nach oben blicken und neue Gipfel entdecken." },
 
-    { id: "modeblick", collection: "essential", name: "MODEBLICK", color: "Olive Green", price: "49,00 €",
+    { id: "modeblick", collection: "essential", name: "MODEBLICK", color: "Schwarz / Grau", price: "49,00 €",
       badge: "",
-      colors: [ {name:"Olive Green", value:"#5c6b3c", productId:"modeblick"}, {name:"Sand Brown", value:"#c9a878", productId:"waldblick"} ],
-      link: "produkt.html?id=modeblick", alt: "Modeblick Sonnenbrille in Olive Green" },
+      colors: [ {name:"Schwarz", value:"#111111"}, {name:"Grau", value:"#8a8a8a"} ],
+      link: "produkt.html?id=modeblick", alt: "Modeblick Sonnenbrille in Olive Green",
+      description: "Der Modeblick ist die moderne Brille der Essential Collection. Die runde Form verleiht ihr einen stilbewussten und zeitgemäßen Look. Der schwarze Rahmen und die grauen Gläser lassen sich vielseitig kombinieren und machen das Modell zum passenden Begleiter für einen modernen Stil im Alltag." },
 
-    { id: "waldblick", collection: "essential", name: "WALDBLICK", color: "Sand Brown", price: "49,00 €",
+    { id: "waldblick", collection: "essential", name: "WALDBLICK", color: "Grün / Grau", price: "49,00 €",
       badge: "",
-      colors: [ {name:"Sand Brown", value:"#c9a878", productId:"waldblick"}, {name:"Crystal Blue", value:"#2f5d7c", productId:"seeblick"} ],
-      link: "produkt.html?id=waldblick", alt: "Waldblick Sonnenbrille in Sand Brown" },
+      colors: [ {name:"Grün", value:"#3f6b3a"}, {name:"Grau", value:"#8a8a8a"} ],
+      link: "produkt.html?id=waldblick", alt: "Waldblick Sonnenbrille in Sand Brown",
+      description: "Der grüne Rahmen des Waldblicks erinnert an Wälder, Blätter und die vielen Grüntöne der Natur. Das Modell steht für Spaziergänge, Wanderungen und entspannte Stunden im Freien. Die grauen Gläser ergänzen den natürlichen Charakter und machen die Brille zu einem unkomplizierten Begleiter für den Alltag und für Ausflüge in die Natur." },
 
-    { id: "seeblick", collection: "essential", name: "SEEBLICK", color: "Crystal Blue", price: "49,00 €",
+    { id: "seeblick", collection: "essential", name: "SEEBLICK", color: "Blau / Grau", price: "49,00 €",
       badge: "",
-      colors: [ {name:"Crystal Blue", value:"#2f5d7c", productId:"seeblick"}, {name:"Deep Black", value:"#111111", productId:"abendblick"} ],
-      link: "produkt.html?id=seeblick", alt: "Seeblick Sonnenbrille in Crystal Blue" },
+      colors: [ {name:"Blau", value:"#1f4f9c"}, {name:"Grau", value:"#8a8a8a"} ],
+      link: "produkt.html?id=seeblick", alt: "Seeblick Sonnenbrille in Crystal Blue",
+      description: "Der Seeblick trägt seinen Namen aufgrund des blauen Rahmens. Seine Farbe erinnert an klare Seen, ruhige Wasseroberflächen und erfrischende Tage in der Natur. Die grauen Gläser verleihen dem Modell eine zurückhaltende und alltagstaugliche Wirkung. Eine Brille für alle, die Wasser, Natur und sommerliche Leichtigkeit lieben." },
 
-    { id: "abendblick", collection: "essential", name: "ABENDBLICK", color: "Deep Black", price: "49,00 €",
+    { id: "abendblick", collection: "essential", name: "ABENDBLICK", color: "Rot / Grau", price: "49,00 €",
       badge: "NEU",
-      colors: [ {name:"Deep Black", value:"#111111", productId:"abendblick"}, {name:"Black Smoke", value:"#333333", productId:"alpenblick"} ],
-      link: "produkt.html?id=abendblick", alt: "Abendblick Sonnenbrille in Deep Black" },
+      colors: [ {name:"Rot", value:"#a63232"}, {name:"Grau", value:"#8a8a8a"} ],
+      link: "produkt.html?id=abendblick", alt: "Abendblick Sonnenbrille in Deep Black",
+      description: "Der rote Rahmen des Abendblicks ist von den warmen Farben eines Sonnenuntergangs inspiriert. Er erinnert an gemütliche Abende in der Natur, schönes Licht und den Moment, in dem ein gelungener Tag entspannt ausklingt. Die grauen Gläser gleichen die kräftige Rahmenfarbe aus und verleihen der Brille einen modernen Charakter." },
 
-    { id: "himmelblick", collection: "essential", name: "HIMMELBLICK", color: "[Farbe ergänzen]", price: "49,00 €",
+    { id: "himmelblick", collection: "essential", name: "HIMMELBLICK", color: "Silber / Blau", price: "49,00 €",
       badge: "",
-      colors: [ {name:"[Farbe ergänzen]", value:"#cccccc", productId:"himmelblick"}, {name:"Black Smoke", value:"#333333", productId:"alpenblick"} ],
-      link: "produkt.html?id=himmelblick", alt: "Himmelblick Sonnenbrille" }
+      colors: [ {name:"Silber", value:"#c9ccce"}, {name:"Blau", value:"#1f4f9c"} ],
+      link: "produkt.html?id=himmelblick", alt: "Himmelblick Sonnenbrille",
+      description: "Der Himmelblick verbindet die klassische Pilotenform mit blauen Gläsern. Die Form erinnert an Flugzeuge und das Gefühl, über den Wolken unterwegs zu sein. Die blauen Gläser greifen die Farbe des Himmels auf und stehen für Weite, Natur und Freiheit. Ein markantes Modell für alle, die gerne neue Horizonte entdecken." }
   ],
 
   /* --- Signature Collection: 6 Modelle --- */
   signature: [
-    { id: "resino", collection: "signature", name: "RESINO", color: "Deep Black", price: "69,00 €",
+    { id: "resino", collection: "signature", name: "RESINO", color: "Bernstein / Hellblau", price: "35,90 €",
       badge: "SIGNATURE",
-      colors: [ {name:"Deep Black", value:"#111111", productId:"resino"}, {name:"Dark Havana", value:"#4b332b", productId:"resina"} ],
+      colors: [ {name:"Bernstein", value:"#c98b3c"}, {name:"Hellblau", value:"#7fb4dd"} ],
       link: "produkt.html?id=resino", alt: "Resino Sonnenbrille in Deep Black" },
 
-    { id: "resina", collection: "signature", name: "RESINA", color: "Dark Havana", price: "69,00 €",
+    { id: "resina", collection: "signature", name: "RESINA", color: "Bernstein / Braun", price: "35,90 €",
       badge: "",
-      colors: [ {name:"Dark Havana", value:"#4b332b", productId:"resina"}, {name:"Crystal Smoke", value:"#8a8a8a", productId:"viento"} ],
+      colors: [ {name:"Bernstein", value:"#c98b3c"}, {name:"Braun", value:"#6b4a2f"} ],
       link: "produkt.html?id=resina", alt: "Resina Sonnenbrille in Dark Havana" },
 
-    { id: "viento", collection: "signature", name: "VIENTO", color: "Crystal Smoke", price: "69,00 €",
+    { id: "viento", collection: "signature", name: "VIENTO", color: "Kristall / Grüngrau", price: "35,90 €",
       badge: "NEU",
-      colors: [ {name:"Crystal Smoke", value:"#8a8a8a", productId:"viento"}, {name:"Black Gradient", value:"#5a5a5a", productId:"vientina"} ],
+      colors: [ {name:"Kristall", value:"#e4e6e7"}, {name:"Grüngrau", value:"#7e8b78"} ],
       link: "produkt.html?id=viento", alt: "Viento Sonnenbrille in Crystal Smoke" },
 
-    { id: "vientina", collection: "signature", name: "VIENTINA", color: "Black Gradient", price: "69,00 €",
+    { id: "vientina", collection: "signature", name: "VIENTINA", color: "Kristall / Grau", price: "35,90 €",
       badge: "",
-      colors: [ {name:"Black Gradient", value:"#5a5a5a", productId:"vientina"}, {name:"Transparent Amber", value:"#c98b3c", productId:"tierra"} ],
+      colors: [ {name:"Kristall", value:"#e4e6e7"}, {name:"Grau", value:"#8a8a8a"} ],
       link: "produkt.html?id=vientina", alt: "Vientina Sonnenbrille in Black Gradient" },
 
-    { id: "tierra", collection: "signature", name: "TIERRA", color: "Transparent Amber", price: "69,00 €",
+    { id: "tierra", collection: "signature", name: "TIERRA", color: "Olivgrün / Grau", price: "35,90 €",
       badge: "",
-      colors: [ {name:"Transparent Amber", value:"#c98b3c", productId:"tierra"}, {name:"Forest Green", value:"#274232", productId:"tierrina"} ],
+      colors: [ {name:"Olivgrün", value:"#5c6b3c"}, {name:"Grau", value:"#8a8a8a"} ],
       link: "produkt.html?id=tierra", alt: "Tierra Sonnenbrille in Transparent Amber" },
 
-    { id: "tierrina", collection: "signature", name: "TIERRINA", color: "Forest Green", price: "69,00 €",
+    { id: "tierrina", collection: "signature", name: "TIERRINA", color: "Olivgrün / Grau", price: "35,90 €",
       badge: "",
-      colors: [ {name:"Forest Green", value:"#274232", productId:"tierrina"}, {name:"Deep Black", value:"#111111", productId:"resino"} ],
+      colors: [ {name:"Olivgrün", value:"#5c6b3c"}, {name:"Grau", value:"#8a8a8a"} ],
       link: "produkt.html?id=tierrina", alt: "Tierrina Sonnenbrille in Forest Green" }
   ]
 };
@@ -149,6 +190,21 @@ function getProduct(id) {
   // Galerie-Bilder: feste Dateinamen aus  bilder/produkte/<id>/  (siehe assets/js/bilder.js)
   const images = p.images || (window.SF && SF.bilder ? SF.bilder.produkt(p.id) : []);
   return Object.assign({}, base, p, { images });
+}
+
+
+/* Preis auf den Produktkarten.
+   Hat ein Produkt (oder seine Kollektion) eine Staffel, zeigt die Karte den
+   günstigsten Nettopreis als „ab …“ – sonst den normalen Preis wie bisher.
+   Die Karten bekommen die Rohdaten ohne Kollektions-Defaults, deshalb wird
+   hier zusätzlich in COLLECTION_DEFAULTS nachgesehen. */
+function kartenPreis(p) {
+  if (!p) return "";
+  const st = p.staffel || (COLLECTION_DEFAULTS[p.collection] || {}).staffel;
+  if (!st || !Array.isArray(st.stufen) || !st.stufen.length) return p.price || "";
+  const guenstigste = Math.min.apply(null, st.stufen.map(s => Math.round(s.netto * 100)));
+  const euro = new Intl.NumberFormat("de-AT", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return "ab " + euro.format(guenstigste / 100) + " € netto";
 }
 
 
@@ -179,7 +235,7 @@ function productCard(p) {
           <h3 class="pcard-name">${p.name}</h3>
           <p class="pcard-color">${p.color || ""}</p>
           ${colorDots(p.colors)}
-          <p class="pcard-price">${p.price || ""}</p>
+          <p class="pcard-price">${kartenPreis(p)}</p>
           <a class="pcard-cta" href="${link}">Produkt ansehen</a>
         </div>
       </article>`;
@@ -216,7 +272,7 @@ function productGridCard(p) {
           ${colorDots(p.colors)}
           <div class="gcard-row">
             <h3 class="gcard-name">${p.name}${color}</h3>
-            <span class="gcard-price">${p.price || ""}</span>
+            <span class="gcard-price">${kartenPreis(p)}</span>
           </div>
         </div>
       </article>`;

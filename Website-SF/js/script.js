@@ -15,8 +15,8 @@
 
 /* 1. ================= KONFIGURATION ================= */
 
-/* >>> Zentrale Kontakt-E-Mail – HIER die echte Adresse eintragen. */
-const KONTAKT_EMAIL = "info@sichtfaktor.de"; // TODO: echte E-Mail eintragen
+/* >>> Zentrale Kontakt-E-Mail. */
+const KONTAKT_EMAIL = "hello@sichtfaktor.com";
 
 /* >>> HINWEIS: Dieser Produktkatalog wird von KEINER Seite mehr verwendet.
    Die aktuellen Produkte stehen in assets/js/products.js, die Bilder liegen

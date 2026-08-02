@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sichtfaktor – Individuelle Sonnenbrillen für Firmen und Vereine</title>
   <meta name="description" content="Sichtfaktor gestaltet individuelle Sonnenbrillen für Unternehmen, Vereine und Events – gebrandet mit Logo und in euren Farben. Vom Modell bis zur fertigen Kleinserie.">
-  <link rel="stylesheet" href="css/styles.css?v=16">
+  <link rel="stylesheet" href="css/styles.css?v=29">
   <!-- Favicon: einfach bilder/marke/favicon.png ablegen – wird automatisch eingebunden -->
   <!-- Bildsystem: alle Bilder liegen im Ordner  bilder/  (siehe bilder/ANLEITUNG.txt).
        Bewusst im <head>, damit das grosse Startbild sofort geladen wird. -->
-  <script src="assets/js/bilder.js?v=16"></script>
+  <script src="assets/js/bilder.js?v=29"></script>
 </head>
 <!-- body.home aktiviert die transparente Navigation über dem Hero -->
 <body class="home">
@@ -52,8 +52,11 @@
         </nav>
       </div>
 
-      <!-- Mitte: Logo als Wortmarke (Farbe passt sich automatisch an) -->
-      <a class="nav-logo" href="index.html">Sichtfaktor</a>
+      <!-- Mitte: Bildlogo (ueber dem Hero automatisch die helle Variante) -->
+      <a class="nav-logo" href="index.html">
+        <img class="nav-logo__bild" src="bilder/marke/logo-quer.png?v=29" alt="Sichtfaktor" width="900" height="237">
+        <img class="nav-logo__bild nav-logo__bild--hell" src="bilder/marke/logo-quer-hell.png?v=29" alt="" aria-hidden="true" width="900" height="237">
+      </a>
 
       <!-- Rechts: Kontakt + Suche + Warenkorb -->
       <div class="nav-side nav-side--right">
@@ -310,7 +313,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="brand" href="index.html">Sicht<span>faktor</span></a>
+          <a class="brand" href="index.html"><img src="bilder/marke/logo-quer.png?v=29" alt="Sichtfaktor" width="900" height="237"></a>
           <p>Individuelle Sonnenbrillen für Unternehmen, Vereine, Events und Organisationen – gebrandet in eurem Design.</p>
         </div>
         <div class="footer-col">
@@ -353,14 +356,14 @@
         <span>© <span data-year>2026</span> Sichtfaktor. Alle Rechte vorbehalten.</span>
         <nav aria-label="Sonstiges">
           <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
-          <a data-email href="#">E-Mail</a>
+          <a data-email href="mailto:hello@sichtfaktor.com">E-Mail</a>
         </nav>
       </div>
     </div>
   </footer>
 
   <!-- Reihenfolge: erst allgemeine Skripte, dann Produktdaten/Slider -->
-  <script src="js/script.js?v=16"></script>
-  <script src="assets/js/products.js?v=16"></script>
+  <script src="js/script.js?v=29"></script>
+  <script src="assets/js/products.js?v=29"></script>
 </body>
 </html>

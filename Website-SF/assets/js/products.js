@@ -62,7 +62,7 @@ const COLLECTION_DEFAULTS = {
     description: "Ausführliche Produktbeschreibung ergänzen. Die Essential Collection steht für klare Formen und unkomplizierte Passformen.",
     lifestyleHeadline: "Entwickelt für den Alltag",
     care: PFLEGE,
-    features: { uvProtection: "UV 400", filterCategory: "Kategorie 3", frameMaterial: "Bitte ergänzen", fit: "Bitte ergänzen", weight: "Bitte ergänzen" },
+    features: { uvProtection: "UV 400", filterCategory: "Kategorie 3" },
     shipping: "Die durchschnittliche Lieferzeit beträgt 5–7 Werktage.",
     returns: RUECKGABE,
     staffel: STAFFEL_STANDARD,   /* gilt für alle 8 Essential-Modelle */
@@ -74,7 +74,7 @@ const COLLECTION_DEFAULTS = {
     description: "Ausführliche Produktbeschreibung ergänzen. Die Signature Collection steht für ausdrucksstärkere Silhouetten und charakteristische Details.",
     lifestyleHeadline: "Ein Modell mit Charakter",
     care: PFLEGE,
-    features: { uvProtection: "UV 400", filterCategory: "Kategorie 3", frameMaterial: "Bitte ergänzen", fit: "Bitte ergänzen", weight: "Bitte ergänzen" },
+    features: { uvProtection: "UV 400", filterCategory: "Kategorie 3" },
     shipping: "Die durchschnittliche Lieferzeit beträgt 25–30 Werktage.",
     returns: RUECKGABE,
     ustHinweis: "inkl. 20 % USt.",   /* Privatkundenpreis ist brutto        */

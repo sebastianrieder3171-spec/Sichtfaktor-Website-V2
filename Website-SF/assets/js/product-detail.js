@@ -270,7 +270,6 @@
         <h2 class="pd-b2b__title">Dieses Modell individualisieren</h2>
         <p>Ausgewählte Modelle können für Unternehmen, Vereine und Events mit Logo oder eigener Verpackung gestaltet werden.</p>
         <div class="fb-actions">
-          <a class="btn btn-accent" href="unternehmen.html">Zum Firmen-Shop</a>
           <a class="btn btn-outline" href="kontakt.html?anliegen=projekt">Projekt anfragen</a>
         </div>
       </div>` : ""}
@@ -306,9 +305,6 @@
           <dl class="pd-specs">
             ${row("UV-Schutz", f.uvProtection)}
             ${row("Filterkategorie", f.filterCategory)}
-            ${row("Rahmenmaterial", f.frameMaterial)}
-            ${row("Passform", f.fit)}
-            ${row("Gewicht", f.weight)}
           </dl>
         </div>
       </details>
